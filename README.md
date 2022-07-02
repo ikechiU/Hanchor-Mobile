@@ -50,7 +50,7 @@ To build this project, you require:
 
 <h2 align="left">Screenshots</h2>
 <h4 align="center">
-<img src="https://https://res.cloudinary.com/dpxkejiyy/image/upload/v1656732433/NextGenDevs/2022_07_02_03.44.52_mcetvj.jpg" width="30%" vspace="10" hspace="10">
+<img src="https://res.cloudinary.com/dpxkejiyy/image/upload/v1656733350/NextGenDevs/2022_07_02_04.41.24_yxf6cn.jpg" width="30%" vspace="10" hspace="10">
 <img src="https://res.cloudinary.com/dpxkejiyy/image/upload/v1656732433/NextGenDevs/2022_07_02_03.45.01_pf4zg5.jpg" width="30%" vspace="10" hspace="10">
 <img src="https://res.cloudinary.com/dpxkejiyy/image/upload/v1656732432/NextGenDevs/2022_07_02_03.41.24_qfom8o.jpg" width="30%" vspace="10" hspace="10">
 <img src="https://res.cloudinary.com/dpxkejiyy/image/upload/v1656732432/NextGenDevs/2022_07_02_04.20.34_jwjyma.jpg" width="30%" vspace="10" hspace="10">
