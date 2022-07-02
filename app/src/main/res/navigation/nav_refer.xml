@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_refer"
+    app:startDestination="@id/referFragment">
+
+    <fragment
+        android:id="@+id/referFragment"
+        android:name="com.nextgendevs.hanchor.presentation.main.fragments.refer.ReferFragment"
+        android:label="@string/refer" />
+
+</navigation>

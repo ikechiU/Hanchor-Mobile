@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary_color_light">#ABD3ED</color>
+    <color name="primary_color">#3AB0FF</color>
+<!--    <color name="primary_color_dark">#039AFF</color>-->
+    <color name="primary_color_dark">#FFFFFF</color>
+<!--    <color name="color_secondary">#FF03DAC5</color>-->
+    <color name="color_secondary">#F39237</color>
+    <color name="color_secondary_variant">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="gratitude">#E7F3FC</color>
+    <color name="goal">#FDF4E4</color>
+    <color name="affirmations">#B9E4DA</color>
+    <color name="happiness_island">#FDE0E0</color>
+
+    <color name="one">#D3DDD5</color>
+    <color name="two">#FFEB3B</color>
+    <color name="three">#C94AD3</color>
+    <color name="four">#F69C47</color>
+    <color name="five">#DEBBE4</color>
+
+<!--    <color name="unselected">#D1D1D1</color>-->
+    <color name="unselected">@color/black</color>
+    <color name="selected">@color/primary_color</color>\
+
+    <color name="journal_dark">#2B1100</color>
+    <color name="accent_dark">#803300</color>
+    <color name="accent_medium">#C6570D</color>
+    <color name="grey_two">#c4c4c4</color>
+
+    <color name="md_grey_100">#F5F5F5</color>
+    <color name="md_deep_orange_400">#FF7043</color>
+    <color name="accent">#F39237</color>
+    <color name="main_blue">#3AB0FF</color>
+    <color name="dark_blue">#405467</color>
+    <color name="md_grey_300">#E0E0E0</color>
+    <color name="dark_grey">#F0F0F0</color>
+
+    <color name="md_deep_orange_100">#FFCCBC</color>
+    <color name="md_deep_orange_300">#FF8A65</color>
+
+    <color name="default_affirmation_btn_color">#F0F0F0</color>
+
+    <!--    Switch Colors-->
+    <color name="switch_track_unchanged">#B1AAAA</color>
+    <color name="switch_track_changed">#B1AAAA</color>
+    <color name="switch_thumb_unchanged">@color/dark_blue</color>
+    <color name="switch_thumb_changed">@color/primary_color</color>
+
+    <color name="radio_color">@color/primary_color</color>
+
+</resources>

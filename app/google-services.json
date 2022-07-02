@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "476270310087",
+    "project_id": "hanchor",
+    "storage_bucket": "hanchor.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:476270310087:android:f033a930e060f84ab084e2",
+        "android_client_info": {
+          "package_name": "com.nextgendevs.hanchor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "476270310087-v8vlvjr07eq5ea434inl8haenjjrgh64.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDrdXIkGTQVnmpw9PZneDtdYlSci5PuMFs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "476270310087-v8vlvjr07eq5ea434inl8haenjjrgh64.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

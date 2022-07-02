@@ -1,0 +1,266 @@
+package com.nextgendevs.hanchor.presentation.main.fragments.home.todo_list.create_todo
+
+import android.app.DatePickerDialog
+import android.app.TimePickerDialog
+import android.os.Bundle
+import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
+import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation
+import com.nextgendevs.hanchor.business.datasource.network.request.TodoRequest
+import com.nextgendevs.hanchor.business.domain.models.Todo
+import com.nextgendevs.hanchor.business.domain.utils.AreYouSureCallback
+import com.nextgendevs.hanchor.business.domain.utils.StateMessageCallback
+import com.nextgendevs.hanchor.databinding.FragmentCreateTodoBinding
+import com.nextgendevs.hanchor.presentation.auth.fragment.login.LoginFragmentDirections
+import com.nextgendevs.hanchor.presentation.main.fragments.home.todo_list.viewmodel.TodoViewModel
+import com.nextgendevs.hanchor.presentation.utils.*
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.util.*
+
+class CreateTodoFragment : BaseCreateTodoFragment() {
+    private var _binding: FragmentCreateTodoBinding? = null
+    private val binding: FragmentCreateTodoBinding get() = _binding!!
+    private val viewModel: TodoViewModel by viewModels()
+
+    private val currentDateTime = Calendar.getInstance()
+    private var startYear = currentDateTime.get(Calendar.YEAR)
+    private var startMonth = currentDateTime.get(Calendar.MONTH)
+    private var startDay = currentDateTime.get(Calendar.DAY_OF_MONTH)
+    private var startHour = currentDateTime.get(Calendar.HOUR_OF_DAY)
+    private var startMinute = currentDateTime.get(Calendar.MINUTE)
+
+    private var _id = 0L
+    private var year = 0
+    private var month = 0
+    private var day = 0
+    private var hour = 0
+    private var minute = 0
+
+    private var todo: Todo? = null
+
+    private var shouldObserveOnce = true
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                areYouSure()
+            }
+        })
+    }
+
+    private fun OnBackPressedCallback.areYouSure() {
+        activity?.areYouSureDialog("Navigate to Planner", object : AreYouSureCallback {
+            override fun proceed() {
+                this@areYouSure.isEnabled = false
+                activity?.onBackPressed()
+            }
+
+            override fun cancel() {
+                Log.d(TAG, "cancel: pressed.")
+            }
+        })
+    }
+
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentCreateTodoBinding.inflate(layoutInflater)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        Log.d(
+            TAG,
+            "onViewCreated: AuthToken: ${mySharedPreferences.getStoredString(Constants.AUTH_TOKEN)}"
+        )
+
+        val bundle = arguments ?: return
+        val args = CreateTodoFragmentArgs.fromBundle(bundle)
+        todo = args.todo
+
+        if (todo != null)
+            setUpExistingTodo(todo!!)
+
+        binding.btnSave.setOnClickListener {
+            saveTodo()
+        }
+
+        binding.deleteTodo.setOnClickListener {
+            deleteTodo()
+        }
+
+        binding.navigateUp.setOnClickListener {
+            navigateToTodoFragment()
+        }
+
+        binding.calendar.setOnClickListener {
+            pickDateTime()
+        }
+    }
+
+    private fun deleteTodo() {
+        Log.d(TAG, "deleteTodo: delete")
+        mySharedPreferences.storeLongValue(Constants.TODO_UPDATE_ID_LOCAL, _id)
+        viewModel.deleteTodo(_id)
+        subscribeObservers()
+    }
+
+    private fun saveTodo() {
+        if (binding.task.text.isNotEmpty() && day != 0 && month != 0 && year != 0 && hour != 0 && minute != 0) {
+            if (_id == 0L) {
+                Log.d(TAG, "saveTodo: insert")
+                val todoRequest =
+                    TodoRequest("Todo", binding.task.text.toString(), getDateLong(), false)
+
+                viewModel.insertTodo(todoRequest)
+            } else {
+                Log.d(TAG, "saveTodo: update")
+                mySharedPreferences.storeLongValue(Constants.TODO_UPDATE_ID_LOCAL, _id)
+                val todoRequest = TodoRequest(
+                    "Todo",
+                    binding.task.text.toString(),
+                    getDateLong(),
+                    binding.isCompleted.isChecked
+                )
+                viewModel.updateTodo(_id, todoRequest)
+            }
+            subscribeObservers()
+        } else {
+            getContext.toastMessage("Fill fields required")
+        }
+    }
+
+    private fun subscribeObservers() {
+        viewModel.state.observe(viewLifecycleOwner) { todoState ->
+            uiCommunicationListener.displayProgressBar(todoState.isLoading)
+
+            if (todoState.insertResult != 0L) {
+                if (shouldObserveOnce) {
+                    shouldObserveOnce = false
+                    //insert PI
+                    navigateToTodoFragment()
+                }
+            }
+
+            if (todoState.updateResult != 0) {
+                if (shouldObserveOnce) {
+                    shouldObserveOnce = false
+                    //update PI
+                    navigateToTodoFragment()
+                }
+            }
+
+            if (todoState.deleteResult != 0) {
+                if (shouldObserveOnce) {
+                    shouldObserveOnce = false
+                    //delete PI
+                    navigateToTodoFragment()
+                }
+            }
+
+            processQueue(
+                context = context,
+                queue = todoState.queue,
+                stateMessageCallback = object : StateMessageCallback {
+                    override fun removeMessageFromStack() {
+                        viewModel.onRemoveHeadFromQuery()
+                    }
+                })
+        }
+    }
+
+    private fun navigateToTodoFragment() {
+        val directions =
+            CreateTodoFragmentDirections.actionCreateTodoFragmentToTodoFragment()
+        Navigation.findNavController(binding.root).safeNavigate(directions)
+    }
+
+    private fun getDateLong(): Long {
+        val sdf = SimpleDateFormat("dd-M-yyyy hh:mm:ss")
+
+        val dateString = "$day-${month + 1}-$year $hour:$minute:00"
+
+        val cal = Calendar.getInstance()
+        try {
+            val date: Date = sdf.parse(dateString)!!
+            cal.time = date
+        } catch (e: ParseException) {
+            e.printStackTrace()
+        }
+
+        return cal.timeInMillis
+    }
+
+    private fun setUpExistingTodo(todo: Todo) {
+        binding.deleteTodo.visibility = View.VISIBLE
+        binding.isCompleted.visibility = View.GONE
+        _id = todo.id
+        binding.task.setText(todo.todoTask)
+        binding.isCompleted.isChecked = todo.todoIsCompleted
+        binding.task.setText(todo.todoTask)
+        setTime(todo.todoDate)
+        setDateTime()
+    }
+
+    private fun pickDateTime() {
+        DatePickerDialog(getContext, DatePickerDialog.OnDateSetListener { _, year, month, day ->
+            this.year = year
+            this.month = month
+            this.day = day
+            TimePickerDialog(getContext, TimePickerDialog.OnTimeSetListener { _, hour, minute ->
+                this.hour = hour
+                this.minute = minute
+                Log.d(TAG, "pickDateTime: $hour")
+
+                setDateTime()
+            }, startHour, startMinute, false).show()
+        }, startYear, startMonth, startDay).show()
+    }
+
+    private fun setDateTime() {
+        val time = "$day/${(month + 1)}/$year" + "  " + setAmPm("$hour:$minute")
+        binding.time.setText(time)
+    }
+
+    private fun setTime(currentTime: Long) {
+        val currentDate = Date(currentTime)
+        val cal = Calendar.getInstance()
+        cal.time = currentDate
+
+        year = cal.get(Calendar.YEAR)
+        month = cal.get(Calendar.MONTH)
+        day = cal.get(Calendar.DAY_OF_MONTH)
+        hour = cal.get(Calendar.HOUR_OF_DAY)
+        minute = cal.get(Calendar.MINUTE)
+    }
+
+    private fun setAmPm(time: String): String {
+        val hourMinuteFormat = SimpleDateFormat("HH:mm")
+        val am_pmFormat = SimpleDateFormat("hh:mm aa")
+
+        var date: Date? = null
+        try {
+            date = hourMinuteFormat.parse(time)
+        } catch (e: ParseException) {
+            e.printStackTrace()
+        }
+        return am_pmFormat.format(date!!)
+    }
+
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+}

@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.main.fragments.home.HomeFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp">
+
+            <LinearLayout
+                android:id="@+id/app_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="56dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/placeholder_title"
+                    style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="16dp"
+                    android:gravity="center"
+                    android:text="@string/home"
+                    android:textColor="@color/black" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/welcome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/inter"
+                android:text="@string/welcome"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/app_bar" />
+
+            <TextView
+                android:id="@+id/username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/inter"
+                android:text="@string/sojimi"
+                android:textColor="@color/main_blue"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginStart="3dp"
+                app:layout_constraintStart_toEndOf="@id/welcome"
+                app:layout_constraintTop_toBottomOf="@id/app_bar" />
+
+            <TextView
+                android:id="@+id/text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/inter"
+                android:text="@string/home_text"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/username" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_gratitude"
+                android:layout_width="154dp"
+                android:layout_height="74dp"
+                android:layout_marginStart="1dp"
+                android:layout_marginTop="30dp"
+                android:elevation="8dp"
+                app:cardCornerRadius="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/gratitude"
+                    android:fontFamily="@font/inter"
+                    android:gravity="center"
+                    android:text="@string/count_my_n_blessings"
+                    android:textColor="@color/black" />
+
+            </androidx.cardview.widget.CardView>
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_todo"
+                android:layout_width="154dp"
+                android:layout_height="74dp"
+                android:layout_marginStart="1dp"
+                android:layout_marginTop="30dp"
+                android:elevation="8dp"
+                app:cardCornerRadius="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/goal"
+                    android:fontFamily="@font/inter"
+                    android:gravity="center"
+                    android:text="@string/life_n_planner"
+                    android:textColor="@color/black" />
+
+            </androidx.cardview.widget.CardView>
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_affirmations"
+                android:layout_width="154dp"
+                android:layout_height="74dp"
+                android:layout_marginStart="1dp"
+                android:layout_marginTop="30dp"
+                android:elevation="8dp"
+                app:cardCornerRadius="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/card_gratitude">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/affirmations"
+                    android:fontFamily="@font/inter"
+                    android:gravity="center"
+                    android:text="@string/my_n_affirmations"
+                    android:textColor="@color/black" />
+
+            </androidx.cardview.widget.CardView>
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_happiness_island"
+                android:layout_width="154dp"
+                android:layout_height="74dp"
+                android:layout_marginStart="1dp"
+                android:layout_marginTop="30dp"
+                android:elevation="8dp"
+                app:cardCornerRadius="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/card_todo">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/happiness_island"
+                    android:fontFamily="@font/inter"
+                    android:gravity="center"
+                    android:text="@string/happines_n_island"
+                    android:textColor="@color/black" />
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/quote_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:fontFamily="@font/inter"
+                android:text="@string/quote_of_the_day"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/card_affirmations" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_quote"
+                android:layout_width="match_parent"
+                android:layout_height="123dp"
+                android:layout_marginStart="1dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="1dp"
+                android:elevation="8dp"
+                app:cardCornerRadius="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/quote_header">
+
+                <TextView
+                    android:id="@+id/quote"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/accent"
+                    android:fontFamily="@font/inter"
+                    android:gravity="center"
+                    android:text="@string/sample_quote"
+                    android:textColor="@color/black" />
+
+            </androidx.cardview.widget.CardView>
+
+
+            <TextView
+                android:id="@+id/life_hack_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:fontFamily="@font/inter"
+                android:text="@string/life_hack"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/card_quote" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_life_hack"
+                android:layout_width="match_parent"
+                android:layout_height="123dp"
+                android:layout_marginStart="1dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="1dp"
+                android:elevation="8dp"
+                app:cardCornerRadius="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/life_hack_header">
+
+                <TextView
+                    android:id="@+id/life_hack"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/md_grey_300"
+                    android:fontFamily="@font/inter"
+                    android:gravity="center"
+                    android:text="@string/sample_quote"
+                    android:textColor="@color/black" />
+
+            </androidx.cardview.widget.CardView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                app:layout_constraintTop_toBottomOf="@id/card_life_hack" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

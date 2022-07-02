@@ -1,0 +1,133 @@
+<resources>
+    <string name="app_name">Hanchor</string>
+    <string name="hanchor">hanch<font color='#F39237'>o</font>r</string>
+    <string name="settings">Settings</string>
+    <string name="text_success"><b>Success</b></string>
+    <string name="text_error"><b>Error</b></string>
+    <string name="text_ok"><font color='#03B0F4'>OK</font></string>
+    <string name="text_yes"><font color='#03B0F4'>Yes</font></string>
+    <string name="text_cancel"><font color='#03B0F4'>Cancel</font></string>
+    <string name="are_you_sure">Are you sure?</string>
+    <string name="text_info">Info</string>
+    <string name="return_to_page">Info</string>
+    <string name="schedule_exact_alarms">This app sets alarm and notification at exact scheduled time. Hence, it requires that you allow Alarms &amp; Reminders permission.</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="home">Home</string>
+    <string name="refer">Refer</string>
+    <string name="profile">Profile</string>
+    <string name="settings_menu">Settings</string>
+    <string name="fab">fab</string>
+    <string name="title">Title</string>
+    <string name="date">Date</string>
+    <string name="dd_mm_yyyy">DD/MM/YYYY</string>
+    <string name="_00_00">00:00</string>
+    <string name="dot">.</string>
+    <string name="hh_mm">hh:mm</string>
+    <string name="save_content">Save Content</string>
+    <string name="topic">Topic</string>
+    <string name="next">next</string>
+    <string name="back">back</string>
+
+    <string name="onboarding_images">onboarding images</string>
+
+    <string name="first_onboarding_description">Journal all the things you are thankful for and share your joy.</string>
+    <string name="second_onboarding_description">Start your day with powerful words of affirmation.</string>
+    <string name="third_onboarding_description">Organise all your to-do list with our effective planner feature.</string>
+
+    <string name="first_onboarding_ttle">Gratitude</string>
+    <string name="second_onboarding_ttle">Affirmation</string>
+    <string name="third_onboarding_ttle">Plan your day</string>
+    <string name="get_started">Get Started</string>
+    <string name="finish">FINISH</string>
+    <string name="create_account">Quicky create an account to continue</string>
+    <string name="full_name">Full Name <font color='#FF0000'>*</font></string>
+    <string name="email">Email <font color='#FF0000'>*</font></string>
+    <string name="password">Password <font color='#FF0000'>*</font></string>
+    <string name="sign_up">Sign Up</string>
+    <string name="or_sign_up_with">Or sign up with</string>
+    <string name="already_have_an_account_login">Already have an account? <font color='#3AB0FF'><b> Login</b></font></string>
+    <string name="forgot_password">Forgot password? <font color='#3AB0FF'><b> Reset</b></font></string>
+    <string name="remembered_password">Remembered password? <font color='#3AB0FF'><b> Login</b></font></string>
+    <string name="login">Login</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="hey_sojimi">Sojimi</string>
+    <string name="welcome_text">There are 8 billion people on the planet, but you are unique and outstanding among the rest. We are so glad to have you on Hanchor.</string>
+    <string name="let_s_go">Let\'s Go</string>
+    <string name="welcome">Welcome,</string>
+    <string name="sojimi">Sojimi</string>
+    <string name="home_text">What would you like to do today?</string>
+    <string name="count_my_n_blessings">Count my \n blessings</string>
+    <string name="life_n_planner">Life \n planner</string>
+    <string name="happines_n_island">Happines \n island</string>
+    <string name="my_n_affirmations">My \n Affirmations</string>
+    <string name="quote_of_the_day">Quote of the day</string>
+    <string name="sample_quote">“I’m not a man of preacher of love. am a war, am a fight, am Inbadoski Bahose. Violence shall spread”</string>
+    <string name="life_hack">Life hack</string>
+    <string name="count_my_blessings">Count my blessings</string>
+    <string name="sat_25_2022">Sat, 25 2022</string>
+    <string name="today_i_am_grateful_for">Today I am grateful for...</string>
+    <string name="save">Save</string>
+    <string name="sample_gratitude">I am grateful for life, for health, for family, for peace of mind, for joy in my heart...</string>
+    <string name="enter_your_message">Enter your message</string>
+    <string name="_25_06_2022">25/06/2022</string>
+    <string name="_16_50_pm">16:50 PM</string>
+    <string name="add_gratitude">Click the + button below to\n start counting your blessings</string>
+    <string name="add_todo">Click the + button to add your\n first task</string>
+    <string name="my_affirmations">My Affirmations</string>
+    <string name="hey">Hey,</string>
+    <string name="i_have_more_than_enough">I have more than enough</string>
+    <string name="image">image</string>
+    <string name="username">Username</string>
+    <string name="email_plain">Email</string>
+    <string name="sojimi_gmail_com">sojimi@gmail.com</string>
+    <string name="my_planner">My Planner</string>
+    <string name="logout">Logout</string>
+    <string name="theme_appearance">Appearance</string>
+    <string name="light">Light</string>
+    <string name="subscribe_news">Subscribe News</string>
+    <string name="deactivated">Deactivated</string>
+    <string name="drop_down_arrow">Drop down</string>
+    <string name="dark">Dark</string>
+    <string name="system">System</string>
+    <string name="copyright">Copyright</string>
+    <string name="copyright_c">\u00A9</string>
+    <string name="about_header">About</string>
+    <string name="send_message"><a href="mailto:ikechi@hotmail.com"><font color="#4863A0">Send us an email</font></a></string>
+    <string name="contact_us">Contact us</string>
+    <string name="catalog_date">Catalog date</string>
+    <string name="catalog">Catalog</string>
+    <string name="terms_of_use_body_">Hanchor has been designed to help inspire lives. Hence, you
+        may use this app solely for your personal (non-commercial) good. We reserve all rights for the content of this app. So, do not write a software
+        or another app that uses the program or data from Shift Schedule(OCP) whether it is done in exchange for money or not.</string>
+    <string name="terms_of_use">Terms of use</string>
+    <string name="version">App version</string>
+    <string name="license_agreement"><a href="http://www.apache.org/licenses/LICENSE-2.0.txt"><font color="#4863A0">License Agreement</font></a></string>
+    <string name="privacy_header">Privacy</string>
+    <string name="_1_0">1.0</string>
+    <string name="about_body">This app encompasses two major features, a gratitude component that will be a platform that helps users feel better by allowing them to say how they feel and then receive some sort of feedback that makes them feel better, less worried, reduces anxiety, some special features we’ll be implementing is a goal-setting page and a random daily quote to users. The other component is a todo that enables users to add tasks, delete tasks and also know which tasks are completed or not. A special feature for the todo app will be a reminder feature.</string>
+    <string name="terms_of_use_message">Hanchor has been designed to help inspire lives. Hence, you may use this app solely for your personal (non-commercial) good. We reserve all rights for the content of this app. So, do not write a software or another app that uses the program or data from Shift Schedule(OCP) whether it is done in exchange for money or not.</string>
+    <string name="task_what_to_do">What would you like to do?</string>
+    <string name="i_want_to">I want to...</string>
+    <string name="when_do_you_want_to_perform_this_task">When do you want to perform this task?</string>
+    <string name="choose_date_in_calender">Choose date in calender</string>
+    <string name="what_name_should_we_call_you">What name should we call you?</string>
+
+    <string name="prosperity">Prosperity</string>
+    <string name="love">Love</string>
+    <string name="iam">I am</string>
+    <string name="family">Family</string>
+    <string name="self_esteem">Self Esteem</string>
+    <string name="spiritual">Spiritual</string>
+    <string name="beauty">Beauty</string>
+    <string name="success">Success</string>
+    <string name="relationship">Relationship</string>
+    <string name="health">Health</string>
+    <string name="business">Business</string>
+    <string name="forgiveness">Forgiveness</string>
+    <string name="self_improvement">Self Improvement</string>
+    <string name="i_can">I can</string>
+    <string name="user_id">UserId</string>
+    <string name="fullname">Full name</string>
+    <string name="add_image">Add Image</string>
+</resources>
