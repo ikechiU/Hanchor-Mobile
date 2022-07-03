@@ -9,5 +9,5 @@ data class Todo(
     val todoTitle: String,
     val todoTask: String,
     val todoDate: Long,
-    val todoIsCompleted: Boolean = false
+    val todoIsCompleted: Boolean
 ) : Parcelable

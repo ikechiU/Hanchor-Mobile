@@ -68,6 +68,11 @@ class FetchTodos @Inject constructor(
                         )
                     )
                 } else {
+
+                    emit(
+                        DataState.data(null, cache.fetchTodos(page, limit).map { it.toTodo() })
+                    )
+
                     emit(
                         DataState.error(
                             Response(response.errorBody().toString(), UIComponentType.Toast, MessageType.Error)

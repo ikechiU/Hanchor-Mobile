@@ -3,6 +3,9 @@ package com.nextgendevs.hanchor.presentation.utils
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import com.nextgendevs.hanchor.business.domain.models.Todo
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
@@ -64,19 +67,19 @@ class MySharedPreferences @Inject constructor(@ApplicationContext context: Conte
 
 fun MySharedPreferences.setDefaultTodoId() : Long {
     return if (this.getStoredLong(Constants.TODO_INSERT_ID_LOCAL) == 0L) {
-        (0L - 1L)
+        (0L + 6000L)
     } else {
-        (getStoredLong(Constants.TODO_INSERT_ID_LOCAL) - 1L)
+        (getStoredLong(Constants.TODO_INSERT_ID_LOCAL) + 1L)
     }
 }
 
 
-//fun MySharedPreferences.getReminderList() : List<Reminder>? {
-//    val json: String = this.getStoredString(Constants.LIST_OF_REMINDERS)
-//    val type = object : TypeToken<List<Reminder?>?>() {}.type
-//    return if (Gson().fromJson<List<Reminder>>(json, type) == null)
-//        null
-//    else
-//        Gson().fromJson<List<Reminder>>(json, type)
-//}
+fun MySharedPreferences.getTodoList() : List<Todo>? {
+    val json: String = this.getStoredString(Constants.LIST_OF_TODOS)
+    val type = object : TypeToken<List<Todo?>?>() {}.type
+    return if (Gson().fromJson<List<Todo>>(json, type) == null)
+        null
+    else
+        Gson().fromJson<List<Todo>>(json, type)
+}
 

@@ -1,4 +1,4 @@
-package com.nextgendevs.hanchor.presentation.dashboard.fragment
+package com.nextgendevs.hanchor.presentation.dashboard.fragment.username
 
 import android.os.Bundle
 import android.util.Log
@@ -51,7 +51,7 @@ class UsernameFragment : BaseUsernameFragment() {
 
     private fun navigateToWelcome(view: View) {
         val directions =
-            UsernameFragmentDirections.actionUsernameFragmentToWelcomeFragment()
+           UsernameFragmentDirections.actionUsernameFragmentToWelcomeFragment()
         Navigation.findNavController(view).safeNavigate(directions)
     }
 

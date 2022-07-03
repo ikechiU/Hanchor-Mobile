@@ -12,6 +12,7 @@ import androidx.core.app.NotificationCompat
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.callbacks.onDismiss
 import com.nextgendevs.hanchor.R
+import com.nextgendevs.hanchor.presentation.auth.AuthActivity
 import com.nextgendevs.hanchor.presentation.main.MainActivity
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -219,9 +220,15 @@ fun Context.getBroadcastPendingIntent(alarmIntent: Intent, requestCode: Int): Pe
 }
 
 fun setAlarm(alarmManager: AlarmManager, alarmTime: Long, alarmPendingIntent: PendingIntent?) {
-    if (Build.VERSION.SDK_INT >= 23) {
-        alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, alarmTime, alarmPendingIntent)
-    } else
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP, alarmTime, alarmPendingIntent)
+    alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, alarmTime, alarmPendingIntent)
+}
+
+fun Activity.logoutUser(mySharedPreferences: MySharedPreferences) {
+    mySharedPreferences.storeStringValue(Constants.AUTH_TOKEN, "")
+
+    val intent = Intent(this, AuthActivity::class.java)
+    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+    startActivity(intent)
+    finish()
 }
 

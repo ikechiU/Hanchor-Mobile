@@ -52,6 +52,12 @@ class InsertTodo @Inject constructor(
                         result
                     )
                 )
+            } else {
+                emit(
+                    DataState.error(
+                        Response(result.toString(), UIComponentType.Toast, MessageType.Success)
+                    )
+                )
             }
         } else {
 

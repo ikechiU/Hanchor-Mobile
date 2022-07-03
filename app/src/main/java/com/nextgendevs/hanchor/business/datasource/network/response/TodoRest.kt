@@ -3,16 +3,16 @@ package com.nextgendevs.hanchor.business.datasource.network.response
 import com.nextgendevs.hanchor.business.domain.models.Todo
 
 class TodoRest(
-    var id: Long = 0,
-    var title: String = "",
-    var task: String = "",
-    var date: Long = 0,
-    var isCompleted: Boolean = false
+    val id: Long,
+    val title: String,
+    val task: String,
+    val date: Long,
+    val completed: Boolean
 )
 
 
 fun TodoRest.toTodo() : Todo {
     return Todo(
-        id, title, task, date, isCompleted
+        id, title, task, date, completed
     )
 }

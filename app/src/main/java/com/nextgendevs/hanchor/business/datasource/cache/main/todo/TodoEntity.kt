@@ -17,19 +17,19 @@ data class TodoEntity constructor(
 
     @ColumnInfo(name = TODO_ID)
     @PrimaryKey(autoGenerate = false)
-    var id: Long = 0,
+    val id: Long,
 
     @ColumnInfo(name = TODO_TITLE)
-    var todoTitle: String = "",
+    val todoTitle: String,
 
     @ColumnInfo(name = TODO_TASK)
-    var todoTask: String = "",
+    val todoTask: String,
 
     @ColumnInfo(name = TODO_DATE)
-    var todoDate: Long = 0L,
+    val todoDate: Long,
 
     @ColumnInfo(name = TODO_IS_COMPLETED)
-    var todoIsCompleted: Boolean = false
+    val todoIsCompleted: Boolean
 )
 
 fun TodoEntity.toTodo(): Todo {

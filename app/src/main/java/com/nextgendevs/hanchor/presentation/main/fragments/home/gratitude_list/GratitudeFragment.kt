@@ -15,10 +15,7 @@ import com.nextgendevs.hanchor.business.domain.utils.StateMessageCallback
 import com.nextgendevs.hanchor.databinding.FragmentGratitudeBinding
 import com.nextgendevs.hanchor.presentation.main.fragments.home.gratitude_list.viewmodel.GratitudeViewModel
 import com.nextgendevs.hanchor.presentation.main.fragments.home.todo_list.TodoFragmentDirections
-import com.nextgendevs.hanchor.presentation.utils.TopSpacingItemDecoration
-import com.nextgendevs.hanchor.presentation.utils.displayToast
-import com.nextgendevs.hanchor.presentation.utils.processQueue
-import com.nextgendevs.hanchor.presentation.utils.safeNavigate
+import com.nextgendevs.hanchor.presentation.utils.*
 
 class GratitudeFragment : BaseGratitudeFragment(), SwipeRefreshLayout.OnRefreshListener {
     private var _binding: FragmentGratitudeBinding? = null
@@ -61,7 +58,11 @@ class GratitudeFragment : BaseGratitudeFragment(), SwipeRefreshLayout.OnRefreshL
     private fun subscribeObservers() {
         viewModel.state.observe(viewLifecycleOwner) { gratitudeState ->
             uiCommunicationListener.displayProgressBar(gratitudeState.isLoading)
-            Log.d(TAG, "subscribeObservers: todoState list is ${gratitudeState.gratitudeList}")
+            Log.d(TAG, "subscribeObservers: gratitudeState list is ${gratitudeState.gratitudeList}")
+
+            if(gratitudeState.tokenExpired) {
+                activity?.logoutUser(mySharedPreferences)
+            }
 
             if (gratitudeState.gratitudeList.isNotEmpty()) {
                 binding.emptyGratitude.visibility = View.GONE
@@ -112,7 +113,7 @@ class GratitudeFragment : BaseGratitudeFragment(), SwipeRefreshLayout.OnRefreshL
                             lastPosition == gratitudeListAdapter.itemCount.minus(1) &&
                             viewModel.state.value?.isLoading == false && viewModel.state.value?.isQueryExhausted == false
                         ) {
-                            Log.d(TAG, "TodoFragment: attempting to load next page...")
+                            Log.d(TAG, "GratitudeFragment: attempting to load next page...")
                             viewModel.fetchNextGratitudes()
                         }
                     } else {
@@ -126,7 +127,7 @@ class GratitudeFragment : BaseGratitudeFragment(), SwipeRefreshLayout.OnRefreshL
             gratitudeListAdapter.setGratitudeClickListener(object : GratitudeClickListener {
                 override fun onItemSelected(gratitude: Gratitude, position: Int) {
                     try {
-                        Log.d(TAG, "onItemSelected: The todo position is $position")
+                        Log.d(TAG, "onItemSelected: The gratitude position is $position")
                         val directions =
                             GratitudeFragmentDirections.actionGratitudeFragmentToCreateGratitudeFragment(gratitude)
                         Navigation.findNavController(binding.root).navigate(directions)

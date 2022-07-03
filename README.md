@@ -40,8 +40,8 @@ To build this project, you require:
 * Bottom Navigation - Implemented
 * Count your blessings (Gratitude) - Implemented
 * Post image using MultipartBody.Part - Implemented
+* Plan your day (Todo) Implmented 
 * Profile/Settings Menu in BottomNav - Implemented to add extra touch
-* Plan your day (Todo) Implmented remaining the reminder feature 
 * Quote - Not yet implemented (UI ready)
 * LifeHack - Not yet implemented (UI ready)
 * Happiness Island - Not yet implemented (UI ready)

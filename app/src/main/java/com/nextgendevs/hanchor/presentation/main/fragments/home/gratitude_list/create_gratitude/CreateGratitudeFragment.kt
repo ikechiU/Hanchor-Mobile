@@ -232,6 +232,10 @@ class CreateGratitudeFragment : BaseCreateGratitudeFragment() {
         viewModel.state.observe(viewLifecycleOwner) { gratitudeState ->
             uiCommunicationListener.displayProgressBar(gratitudeState.isLoading)
 
+            if(gratitudeState.tokenExpired) {
+                activity?.logoutUser(mySharedPreferences)
+            }
+
             if (gratitudeState.insertResult != 0L) {
                 if (shouldObserveOnce) {
                     shouldObserveOnce = false

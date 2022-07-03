@@ -10,6 +10,7 @@ import com.nextgendevs.hanchor.presentation.BaseActivity
 import com.nextgendevs.hanchor.presentation.auth.AuthActivity
 import com.nextgendevs.hanchor.presentation.main.MainActivity
 import com.nextgendevs.hanchor.presentation.onboarding.OnBoardingActivity
+import com.nextgendevs.hanchor.presentation.reminder.ReminderActivity
 import com.nextgendevs.hanchor.presentation.utils.Constants
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -24,6 +25,18 @@ class SplashScreenActivity : BaseActivity() {
 
         binding = ActivitySplashScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        when {
+            intent.hasExtra(Constants.FCM_LINK_KEY) -> {
+                startActivity(Intent(this, MainActivity::class.java))
+            }
+            intent.hasExtra(Constants.TODO_REMINDER_TIME) -> {
+                startActivity(Intent(this, ReminderActivity::class.java))
+            }
+            intent.hasExtra(Constants.SNOOZE_TODO_REMINDER_TIME) -> {
+                startActivity(Intent(this, ReminderActivity::class.java))
+            }
+        }
 
         val isFirstTime = mySharedPreferences.getStoredBooleanDefaultTrue(Constants.FIRST_TIME_LOADING)
         val authToken = mySharedPreferences.getStoredString(Constants.AUTH_TOKEN)

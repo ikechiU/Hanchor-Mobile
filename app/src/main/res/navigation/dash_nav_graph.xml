@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/usernameFragment"
-        android:name="com.nextgendevs.hanchor.presentation.dashboard.fragment.UsernameFragment"
+        android:name="com.nextgendevs.hanchor.presentation.dashboard.fragment.username.UsernameFragment"
         android:label="fragment_username"
         tools:layout="@layout/fragment_username" >
 
@@ -23,7 +23,7 @@
 
     <fragment
         android:id="@+id/welcomeFragment"
-        android:name="com.nextgendevs.hanchor.presentation.dashboard.fragment.WelcomeFragment"
+        android:name="com.nextgendevs.hanchor.presentation.dashboard.fragment.welcome.WelcomeFragment"
         android:label="fragment_welcome"
         tools:layout="@layout/fragment_welcome" >
 

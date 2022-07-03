@@ -12,6 +12,7 @@ import com.nextgendevs.hanchor.R
 import com.nextgendevs.hanchor.databinding.FragmentSettingsBinding
 import com.nextgendevs.hanchor.presentation.auth.AuthActivity
 import com.nextgendevs.hanchor.presentation.utils.Constants
+import com.nextgendevs.hanchor.presentation.utils.logoutUser
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -38,12 +39,7 @@ class SettingsFragment : BaseSettingsFragment() {
 
 
         binding.logout.setOnClickListener {
-            mySharedPreferences.storeStringValue(Constants.AUTH_TOKEN, "")
-
-            val intent = Intent(context, AuthActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivity(intent)
-            activity?.finish()
+            activity?.logoutUser(mySharedPreferences)
         }
 
         binding.license.setOnClickListener {

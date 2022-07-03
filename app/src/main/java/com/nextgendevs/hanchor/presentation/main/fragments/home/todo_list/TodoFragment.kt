@@ -14,10 +14,7 @@ import com.nextgendevs.hanchor.business.domain.models.Todo
 import com.nextgendevs.hanchor.business.domain.utils.StateMessageCallback
 import com.nextgendevs.hanchor.databinding.FragmentTodoBinding
 import com.nextgendevs.hanchor.presentation.main.fragments.home.todo_list.viewmodel.TodoViewModel
-import com.nextgendevs.hanchor.presentation.utils.TopSpacingItemDecoration
-import com.nextgendevs.hanchor.presentation.utils.displayToast
-import com.nextgendevs.hanchor.presentation.utils.processQueue
-import com.nextgendevs.hanchor.presentation.utils.safeNavigate
+import com.nextgendevs.hanchor.presentation.utils.*
 
 class TodoFragment : BaseTodoFragment(), SwipeRefreshLayout.OnRefreshListener {
     private var _binding: FragmentTodoBinding? = null
@@ -61,6 +58,10 @@ class TodoFragment : BaseTodoFragment(), SwipeRefreshLayout.OnRefreshListener {
         viewModel.state.observe(viewLifecycleOwner) { todoState ->
             uiCommunicationListener.displayProgressBar(todoState.isLoading)
             Log.d(TAG, "subscribeObservers: todoState list is ${todoState.todoList}")
+
+            if(todoState.tokenExpired) {
+                activity?.logoutUser(mySharedPreferences)
+            }
 
             if (todoState.todoList.isNotEmpty()) {
                 binding.emptyTodo.visibility = View.GONE
@@ -145,7 +146,7 @@ class TodoFragment : BaseTodoFragment(), SwipeRefreshLayout.OnRefreshListener {
     }
 
     override fun onRefresh() {
-        viewModel.fetchNextTodos()
+        viewModel.fetchTodos()
         subscribeObservers()
         binding.swipeRefresh.isRefreshing = false
     }

@@ -1,4 +1,4 @@
-package com.nextgendevs.hanchor.presentation.dashboard.fragment
+package com.nextgendevs.hanchor.presentation.dashboard.fragment.welcome
 
 import android.content.Context
 import android.util.Log
@@ -7,7 +7,7 @@ import com.nextgendevs.hanchor.presentation.main.fragments.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-abstract class BaseUsernameFragment : BaseFragment(){
+abstract class BaseWelcomeFragment : BaseFragment(){
 
     lateinit var uiCommunicationListener: UICommunicationListener
     lateinit var getContext: Context

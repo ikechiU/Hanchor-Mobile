@@ -10,7 +10,7 @@
     <string name="are_you_sure">Are you sure?</string>
     <string name="text_info">Info</string>
     <string name="return_to_page">Info</string>
-    <string name="schedule_exact_alarms">This app sets alarm and notification at exact scheduled time. Hence, it requires that you allow Alarms &amp; Reminders permission.</string>
+    <string name="schedule_exact_alarms">This app sets reminders at exact scheduled time. Hence, it requires that you allow Alarms &amp; Reminders permission.</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="home">Home</string>
@@ -130,4 +130,10 @@
     <string name="user_id">UserId</string>
     <string name="fullname">Full name</string>
     <string name="add_image">Add Image</string>
+    <string name="snooze_min">Snooze min.</string>
+    <string name="done">Done</string>
+    <string name="mark_as_done">Mark as done</string>
+    <string name="_30_minutes_snooze">30 minutes snooze</string>
+    <string name="_15_minutes_snooze">15 minutes snooze</string>
+    <string name="reminder">Reminder</string>
 </resources>

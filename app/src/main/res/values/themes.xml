@@ -58,5 +58,35 @@
         <item name="colorControlActivated">@color/radio_color</item>
     </style>
 
+    <style name="fifteen" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="materialThemeOverlay">@style/myFifteen</item>
+    </style>
+
+    <style name="myFifteen">
+        <item name="android:src">@drawable/ic_15</item>
+        <item name="colorSecondary">@color/primary_color</item>
+        <item name="colorOnSecondary">@color/white</item>
+    </style>
+
+    <style name="thirty" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="materialThemeOverlay">@style/myThirty</item>
+    </style>
+
+    <style name="myThirty">
+        <item name="android:src">@drawable/ic_30</item>
+        <item name="colorSecondary">@color/primary_color</item>
+        <item name="colorOnSecondary">@color/white</item>
+    </style>
+
+    <style name="done" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="materialThemeOverlay">@style/markAsDone</item>
+    </style>
+
+    <style name="markAsDone">
+        <item name="android:src">@drawable/ic_done</item>
+        <item name="colorSecondary">@color/primary_color</item>
+        <item name="colorOnSecondary">@color/white</item>
+    </style>
+
 
 </resources>

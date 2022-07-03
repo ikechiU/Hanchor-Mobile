@@ -1,5 +1,6 @@
 package com.nextgendevs.hanchor.business.usecase.main.todo
 
+import android.util.Log
 import com.nextgendevs.hanchor.business.datasource.cache.datastore.AppDataStore
 import com.nextgendevs.hanchor.business.datasource.cache.datastore.DataStoreKeys
 import com.nextgendevs.hanchor.business.datasource.cache.main.todo.TodoDao
@@ -57,9 +58,10 @@ class UpdateTodo @Inject constructor(
             val response = service.updateTodo(auth, userId, todoId, todoRequest)
 
             if (response.isSuccessful) {
-                val todo = response.body()?.toTodo()
+                val todo = response.body()?.toTodo()!!
+                Log.d("TODO", "execute: $todo")
 
-                val result = todo?.let { cache.updateTodo(it.toTodoEntity()) }
+                val result = cache.updateTodo(todo.toTodoEntity())
                 if (result == 1) {
                     emit(
                         DataState.data(
