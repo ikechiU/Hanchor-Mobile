@@ -41,8 +41,8 @@ To build this project, you require:
 * Count your blessings (Gratitude) - Implemented
 * Post image using MultipartBody.Part - Implemented
 * Plan your day (Todo) Implemented with reminders.
-* Profile/Settings Menu in BottomNav - Implemented to add extra touch
-* Affirmations - Not yet implemented (UI ready)
+* Affirmations - Implemented
+* Profile and Settings Menu in BottomNav - Implemented to add extra touch
 * Happiness Island - Not yet implemented (UI ready)
 * Dark Theme - Not yet implemented 
 * Shimmer Effect - Not yet implemented
