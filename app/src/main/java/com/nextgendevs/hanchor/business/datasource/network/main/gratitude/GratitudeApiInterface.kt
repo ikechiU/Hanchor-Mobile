@@ -38,12 +38,13 @@ interface GratitudeApiInterface {
         @Part file: MultipartBody.Part?
     ): Response<GratitudeRest>
 
+    ///hanchor/v1/users/{userId}/gratitude
     @GET("/hanchor/v1/users/{userId}/gratitude")
     suspend fun getGratitudes(
         @Header("Authorization") authorization: String,
         @Path("userId") userId: String,
-        @Query("limit") limit: Int,
-        @Query("page") page: Int
+        @Query("page") page: Int,
+        @Query("limit") limit: Int
     ): Response<List<GratitudeRest>>
 
     //@DELETE("/hanchor/v1/users/{userId}/gratitude/{gratitudeId}")

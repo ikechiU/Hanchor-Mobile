@@ -29,7 +29,7 @@ class FetchTodos @Inject constructor(
     val checkNetwork: CheckNetwork
 ) {
 
-    fun execute(limit: Int, page: Int): Flow<DataState<List<Todo>>> = flow {
+    fun execute(page: Int, limit: Int): Flow<DataState<List<Todo>>> = flow {
 
         emit(DataState.loading<List<Todo>>())
 
@@ -42,7 +42,7 @@ class FetchTodos @Inject constructor(
 //            val token = mySharedPreferences.getStoredString(Constants.AUTH_TOKEN)
             val userId = mySharedPreferences.getStoredString(Constants.USERID)
 
-            val response = service.getTodos(auth, userId, limit, page)
+            val response = service.getTodos(auth, userId, page, limit)
 
             if(response.isSuccessful) {
                 val listOfTodo = response.body()?.map { it.toTodo() }!!

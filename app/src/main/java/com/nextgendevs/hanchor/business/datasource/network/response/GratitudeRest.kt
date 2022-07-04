@@ -3,11 +3,11 @@ package com.nextgendevs.hanchor.business.datasource.network.response
 import com.nextgendevs.hanchor.business.domain.models.Gratitude
 
 class GratitudeRest(
-    var id: Long = 0,
-    var title: String = "",
-    var message: String = "",
-    var imageUrl: String = "",
-    var imageId: String = "0"
+    val id: Long,
+    val title: String,
+    val message: String,
+    val imageUrl: String,
+    val imageId: String
 )
 
 fun GratitudeRest.toGratitude() : Gratitude {

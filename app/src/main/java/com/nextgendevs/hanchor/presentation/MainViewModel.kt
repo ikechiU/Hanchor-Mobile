@@ -8,18 +8,20 @@ import com.nextgendevs.hanchor.business.domain.utils.StateMessage
 import com.nextgendevs.hanchor.business.domain.utils.UIComponentType
 import com.nextgendevs.hanchor.business.domain.utils.doesMessageAlreadyExistInQueue
 import com.nextgendevs.hanchor.business.usecase.main.AuthTokenCache
+import com.nextgendevs.hanchor.business.usecase.main.GetAffirmation
+import com.nextgendevs.hanchor.business.usecase.main.GetUser
 import com.nextgendevs.hanchor.business.usecase.main.UpdateUsername
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import javax.inject.Inject
 
 private const val TAG = "AppDebug"
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
+    private val getAffirmation: GetAffirmation,
+    private val getUser: GetUser,
     private val updateUsername: UpdateUsername,
     private val authTokenCache: AuthTokenCache
 ): ViewModel(){
@@ -59,6 +61,53 @@ class MainViewModel @Inject constructor(
 
                 dataState.data?.let { result ->
                     state.value = mainState.copy(updateResult = result.username!!)
+                }
+
+                dataState.stateMessage?.let { stateMessage ->
+                    if (stateMessage.response.message == "Token expired") {
+                        state.value = mainState.copy(tokenExpired = true)
+                    }
+                    if (stateMessage.response.message == "No Internet.") {
+                        state.value = mainState.copy(errorMessage = "No Internet.")
+                    }
+                    onError(stateMessage)
+                }
+            }.launchIn(viewModelScope)
+        }
+    }
+
+    fun getUser() {
+        state.value?.let { mainState ->
+
+            getUser.execute().onEach { dataState ->
+                state.value = mainState.copy(isLoading = dataState.isLoading)
+
+                dataState.data?.let { result ->
+                    state.value = mainState.copy(affirmations = result)
+                }
+
+                dataState.stateMessage?.let { stateMessage ->
+                    if (stateMessage.response.message == "Token expired") {
+                        state.value = mainState.copy(tokenExpired = true)
+                    }
+                    if (stateMessage.response.message == "No Internet.") {
+                        state.value = mainState.copy(errorMessage = "No Internet.")
+                    }
+                    onError(stateMessage)
+                }
+            }.launchIn(viewModelScope)
+        }
+    }
+
+    fun getAffirmation() {
+        state.value?.let { mainState ->
+
+            getAffirmation.execute().onEach { dataState ->
+                state.value = mainState.copy(isLoading = dataState.isLoading)
+
+                dataState.data?.let { result ->
+                    Log.d(TAG, "getAffirmation: result is $result")
+                    state.value = mainState.copy(affirmationMessages = result)
                 }
 
                 dataState.stateMessage?.let { stateMessage ->

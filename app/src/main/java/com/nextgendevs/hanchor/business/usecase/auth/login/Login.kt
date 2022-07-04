@@ -5,6 +5,7 @@ import com.nextgendevs.hanchor.business.datasource.cache.auth.AuthTokenDao
 import com.nextgendevs.hanchor.business.datasource.cache.auth.AuthTokenEntity
 import com.nextgendevs.hanchor.business.datasource.cache.datastore.AppDataStore
 import com.nextgendevs.hanchor.business.datasource.cache.datastore.DataStoreKeys
+import com.nextgendevs.hanchor.business.datasource.cache.main.affirmation.AffirmationDao
 import com.nextgendevs.hanchor.business.datasource.network.auth.AuthApiInterface
 import com.nextgendevs.hanchor.business.datasource.network.response.handleUseCaseException
 import com.nextgendevs.hanchor.business.domain.utils.DataState
@@ -47,6 +48,7 @@ class Login @Inject constructor(
         val loginResponse = service.login(Credential.signInCredentials(email, password))
 
         if(loginResponse.isSuccessful){
+
             val headerList: Headers = loginResponse.headers()
 
             val token = headerList["Authorization"]!!

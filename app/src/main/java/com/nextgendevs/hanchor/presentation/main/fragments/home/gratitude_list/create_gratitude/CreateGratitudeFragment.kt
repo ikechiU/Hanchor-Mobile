@@ -180,9 +180,6 @@ class CreateGratitudeFragment : BaseCreateGratitudeFragment() {
                             val cachedFile =
                                 glideRequestManager.asFile().load(imageUrl).submit().get()
                             withContext(Dispatchers.Main) {
-                                Log.d(TAG, "saveGratitude 1: ${Uri.parse(cachedFile.toString())}")
-                                Log.d(TAG, "saveGratitude 2: ${Uri.parse(cachedFile.toString())}")
-
                                 val file = toMultipartBody(createTemporaryFile(Uri.fromFile(cachedFile)))
                                 if (file != null) {
                                     viewModel.updateGratitude(_id, titleRequestBody, messageRequestBody, imageIdRequestBody,file)
@@ -201,7 +198,7 @@ class CreateGratitudeFragment : BaseCreateGratitudeFragment() {
             }
 
         } else {
-            getContext.toastMessage("Graditude message required and Image Required")
+            getContext.toastMessage("Graditude message and image required.")
         }
 
     }

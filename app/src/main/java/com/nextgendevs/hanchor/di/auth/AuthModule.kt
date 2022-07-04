@@ -2,6 +2,7 @@ package com.nextgendevs.hanchor.di.auth
 
 import com.nextgendevs.hanchor.business.datasource.cache.auth.AuthTokenDao
 import com.nextgendevs.hanchor.business.datasource.cache.datastore.AppDataStore
+import com.nextgendevs.hanchor.business.datasource.cache.main.affirmation.AffirmationDao
 import com.nextgendevs.hanchor.business.datasource.network.auth.AuthApiInterface
 import com.nextgendevs.hanchor.business.usecase.auth.forgot_password.ForgotPassword
 import com.nextgendevs.hanchor.business.usecase.auth.login.Login

@@ -11,9 +11,6 @@ interface GratitudeDao {
     @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun updateGratitude(gratitudeEntity: GratitudeEntity): Int
 
-    @Delete()
-    suspend fun deleteJournal(gratitudeEntity: GratitudeEntity): Int
-
     @Query("DELETE FROM gratitude_table WHERE _id = :id")
     suspend fun deleteGratitudeById(id: Long): Int
 

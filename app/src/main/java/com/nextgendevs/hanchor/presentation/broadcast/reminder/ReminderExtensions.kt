@@ -21,10 +21,8 @@ fun Context.scheduleReminder(ids: Array<String?>, tasks: Array<String?>, times: 
 }
 
 fun Context.scheduleReminder(id: Long, task: String, time: Long, isCompleted: Boolean) {
-    if (!isCompleted) {
-        createPendingIntent(id, task, time, isCompleted)
-        Log.d(TAG, "start: createPendingIntent called")
-    }
+    createPendingIntent(id, task, time, isCompleted)
+    Log.d(TAG, "start: createPendingIntent called")
 }
 
 private fun Context.createPendingIntent(id: Long, task: String, time: Long, isCompleted: Boolean) {

@@ -193,16 +193,22 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/quote_header">
 
-                <TextView
-                    android:id="@+id/quote"
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
                     android:background="@color/accent"
-                    android:fontFamily="@font/inter"
-                    android:gravity="center"
-                    android:text="@string/sample_quote"
-                    android:textColor="@color/black" />
+                    android:layout_height="match_parent">
 
+                    <TextView
+                        android:id="@+id/quote"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
+                        android:fontFamily="@font/inter"
+                        android:gravity="center"
+                        android:text="@string/sample_quote"
+                        android:textColor="@color/black" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
 
@@ -231,15 +237,22 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/life_hack_header">
 
-                <TextView
-                    android:id="@+id/life_hack"
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
                     android:background="@color/md_grey_300"
-                    android:fontFamily="@font/inter"
-                    android:gravity="center"
-                    android:text="@string/sample_quote"
-                    android:textColor="@color/black" />
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/life_hack"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
+                        android:fontFamily="@font/inter"
+                        android:gravity="center"
+                        android:text="@string/sample_quote"
+                        android:textColor="@color/black" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.cardview.widget.CardView>
 

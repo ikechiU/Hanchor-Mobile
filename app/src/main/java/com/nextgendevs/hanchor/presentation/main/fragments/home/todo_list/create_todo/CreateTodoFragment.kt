@@ -145,20 +145,24 @@ class CreateTodoFragment : BaseCreateTodoFragment() {
                 viewModel.insertTodo(todoRequest)
                 subscribeObservers()
             } else {
+                val todoRequest = TodoRequest(
+                    "Todo",
+                    binding.task.text.toString(),
+                    getDateLong(),
+                    binding.isCompleted.isChecked
+                )
+
                 if (isSame()) {
-                    getContext.displayToast("No change made.")
-                    navigateToTodoFragment()
+                    if(!isCompletedChanged()) {
+                        Log.d(TAG, "saveTodo: update")
+                        viewModel.updateTodo(_id, todoRequest)
+                        subscribeObservers()
+                    } else {
+                        getContext.displayToast("No change made.")
+                        navigateToTodoFragment()
+                    }
                 } else {
                     Log.d(TAG, "saveTodo: update")
-                    mySharedPreferences.storeLongValue(Constants.TODO_UPDATE_ID_LOCAL, _id)
-                    val todoRequest = TodoRequest(
-                        "Todo",
-                        binding.task.text.toString(),
-                        getDateLong(),
-                        true
-                    )
-
-                    Log.d(TAG, "saveTodo: IS CHECKED is ${binding.isCompleted.isChecked}")
                     viewModel.updateTodo(_id, todoRequest)
                     subscribeObservers()
                 }
@@ -183,8 +187,6 @@ class CreateTodoFragment : BaseCreateTodoFragment() {
 
                     //insert PI
                     getContext.scheduleReminder(id, binding.task.text.toString(), getDateLong(), false)
-                    mySharedPreferences.storeStringValue(Constants.LIST_OF_TODOS, Gson().toJson(todoState.todoList))
-
                     lifecycleScope.launch {
                         delay(200)
                         navigateToTodoFragment()
@@ -196,16 +198,19 @@ class CreateTodoFragment : BaseCreateTodoFragment() {
                 if (shouldObserveOnce) {
                     shouldObserveOnce = false
 
-                    //Delete existing PI
-                    getContext.deleteReminder(todo?.id!!, todo?.todoTask!!, todo?.todoDate!!, todo?.todoIsCompleted!!)
-                    //Update PI
-                    getContext.scheduleReminder(_id, binding.task.text.toString(), getDateLong(), binding.isCompleted.isChecked)
-                    mySharedPreferences.storeStringValue(Constants.LIST_OF_TODOS, Gson().toJson(todoState.todoList))
-
-                    lifecycleScope.launch {
-                        delay(200)
+                    if (!isCompletedChanged()) { //Just update isCompleted without setting reminder
                         navigateToTodoFragment()
+                    } else { //Set reminder only when task or time change
+                        //Delete existing PI
+                        getContext.deleteReminder(todo?.id!!, todo?.todoTask!!, todo?.todoDate!!, todo?.todoIsCompleted!!)
+                        //Update PI
+                        getContext.scheduleReminder(_id, binding.task.text.toString(), getDateLong(), binding.isCompleted.isChecked)
+                        lifecycleScope.launch {
+                            delay(200)
+                            navigateToTodoFragment()
+                        }
                     }
+
                 }
             }
 
@@ -214,8 +219,6 @@ class CreateTodoFragment : BaseCreateTodoFragment() {
                     shouldObserveOnce = false
                     //delete PI
                     getContext.deleteReminder(todo?.id!!, todo?.todoTask!!, todo?.todoDate!!, todo?.todoIsCompleted!!)
-                    mySharedPreferences.storeStringValue(Constants.LIST_OF_TODOS, Gson().toJson(todoState.todoList))
-
                     lifecycleScope.launch {
                         delay(200)
                         navigateToTodoFragment()
@@ -272,8 +275,11 @@ class CreateTodoFragment : BaseCreateTodoFragment() {
 
     private fun isSame(): Boolean {
         return binding.task.text.toString() == todo?.todoTask &&
-                binding.isCompleted.isChecked == todo?.todoIsCompleted &&
                 getDateLong() == todo?.todoDate
+    }
+
+    private fun isCompletedChanged(): Boolean {
+        return binding.isCompleted.isChecked == todo?.todoIsCompleted
     }
 
     private fun pickDateTime() {

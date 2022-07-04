@@ -8,7 +8,6 @@ import android.view.View
 import androidx.activity.viewModels
 import com.google.gson.Gson
 import com.nextgendevs.hanchor.business.datasource.network.request.TodoRequest
-import com.nextgendevs.hanchor.business.domain.models.Todo
 import com.nextgendevs.hanchor.business.domain.utils.StateMessageCallback
 import com.nextgendevs.hanchor.databinding.ActivityReminderBinding
 import com.nextgendevs.hanchor.presentation.BaseActivity
@@ -29,8 +28,6 @@ class ReminderActivity : BaseActivity() {
     private var time = 0L
 
     private val viewModel: TodoViewModel by viewModels()
-    private var todo: Todo? = null
-
     private var shouldObserveOnce = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,19 +41,15 @@ class ReminderActivity : BaseActivity() {
                 startActivity(Intent(this, MainActivity::class.java))
             }
             intent.hasExtra(Constants.TODO_REMINDER_TIME) -> {
-                markTodoAsDone()
-
                 id = intent.getLongExtra(Constants.TODO_REMINDER_ID, 0)
                 task = intent.getStringExtra(Constants.TODO_REMINDER_TASK)!!
                 time = intent.getLongExtra(Constants.TODO_REMINDER_TIME, System.currentTimeMillis())
-
                 binding.reminderTask.text = task
+                markTodoAsDone()
             }
 
             intent.hasExtra(Constants.SNOOZE_TODO_REMINDER_TIME) -> { //New reminder
                 task = intent.getStringExtra(Constants.SNOOZE_TODO_REMINDER_TASK)!!
-                binding.reminderTask.text = task
-
                 binding.reminderTask.text = task
             }
 
@@ -89,11 +82,9 @@ class ReminderActivity : BaseActivity() {
     }
 
     private fun markTodoAsDone() {
-        if(todo != null) {
-            val todoRequest = TodoRequest("TODO", task, time, true)
-            viewModel.updateTodo(id, todoRequest)
-            subscribeObservers()
-        }
+        val todoRequest = TodoRequest("TODO", task, time, true)
+        viewModel.updateTodo(id, todoRequest)
+        subscribeObservers()
     }
 
     private fun subscribeObservers() {
@@ -122,7 +113,7 @@ class ReminderActivity : BaseActivity() {
         displayProgressBar(true)
         Handler(Looper.getMainLooper()).postDelayed({
             finishAndRemoveTask()
-        }, Constants.THREE_SECONDS)
+        }, Constants.FIVE_SECONDS)
     }
 
     override fun displayProgressBar(isLoading: Boolean) {

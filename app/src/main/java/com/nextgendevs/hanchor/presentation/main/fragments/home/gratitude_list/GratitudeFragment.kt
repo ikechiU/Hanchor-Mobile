@@ -79,9 +79,12 @@ class GratitudeFragment : BaseGratitudeFragment(), SwipeRefreshLayout.OnRefreshL
                     }
                 })
 
-            gratitudeListAdapter.apply {
-                submitList(list  = gratitudeState.gratitudeList)
+            if (gratitudeState.gratitudeList.isNotEmpty()) {
+                gratitudeListAdapter.apply {
+                    submitList(list  = gratitudeState.gratitudeList)
+                }
             }
+
         }
     }
 

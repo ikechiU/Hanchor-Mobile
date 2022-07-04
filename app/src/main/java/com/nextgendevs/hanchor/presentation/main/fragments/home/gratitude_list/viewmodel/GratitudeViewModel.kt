@@ -61,8 +61,8 @@ class GratitudeViewModel @Inject constructor(
     }
 
     private fun resetPage() {
-        state.value?.let { todoState ->
-            state.value = todoState.copy(page = 1)
+        state.value?.let { gratitudeState ->
+            state.value = gratitudeState.copy(page = 1)
         }
         updateQueryExhausted(false)
     }
@@ -77,11 +77,12 @@ class GratitudeViewModel @Inject constructor(
         state.value = state.value?.copy(isQueryExhausted = isExhausted)
     }
 
-    fun fetchNextGratitudes(limit: Int = 10, page: Int = 1) {
+    fun fetchNextGratitudes(page: Int = 1, limit: Int = 10) {
         incrementPageNumber()
         state.value?.let { gratitudeState ->
+            Log.d(TAG, "fetchNextGratitudes: page is ${gratitudeState.page}")
 
-            fetchGratitudes.execute(limit, gratitudeState.page).onEach { dataState ->
+            fetchGratitudes.execute(gratitudeState.page, limit).onEach { dataState ->
                 state.value = gratitudeState.copy(isLoading = dataState.isLoading)
 
                 dataState.data?.let { result ->
@@ -156,16 +157,18 @@ class GratitudeViewModel @Inject constructor(
     }
 
 
-   fun fetchGratitudes(limit: Int = 10, page: Int = 1) {
+   fun fetchGratitudes(page: Int = 1, limit: Int = 10) {
        resetPage()
         state.value?.let { gratitudeState ->
+            Log.d(TAG, "fetchGratitudes: page is ${gratitudeState.page}")
 
-            fetchGratitudes.execute(limit, gratitudeState.page).onEach { dataState ->
+            fetchGratitudes.execute(gratitudeState.page, limit).onEach { dataState ->
                 state.value = gratitudeState.copy(isLoading = dataState.isLoading)
 
                 dataState.data?.let { result ->
                     state.value = gratitudeState.copy(isLoading = false)
                     state.value = gratitudeState.copy(gratitudeList = result)
+                    Log.d(TAG, "fetchGratitudes: List is $result")
                 }
 
                 dataState.stateMessage?.let { stateMessage ->

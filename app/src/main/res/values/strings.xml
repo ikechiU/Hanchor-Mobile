@@ -13,6 +13,9 @@
     <string name="schedule_exact_alarms">This app sets reminders at exact scheduled time. Hence, it requires that you allow Alarms &amp; Reminders permission.</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <string name="default_quote">"Learn as if you will live forever, live like you will die tomorrow." — Mahatma Gandhi"</string>
+    <string name="default_life_hack">Pay for things in real money to set aside cash.</string>
+
     <string name="home">Home</string>
     <string name="refer">Refer</string>
     <string name="profile">Profile</string>
@@ -46,7 +49,7 @@
     <string name="password">Password <font color='#FF0000'>*</font></string>
     <string name="sign_up">Sign Up</string>
     <string name="or_sign_up_with">Or sign up with</string>
-    <string name="already_have_an_account_login">Already have an account? <font color='#3AB0FF'><b> Login</b></font></string>
+    <string name="already_have_an_account_login">Already have an account? <font color='#3AB0FF'><strong> Login</strong></font></string>
     <string name="forgot_password">Forgot password? <font color='#3AB0FF'><b> Reset</b></font></string>
     <string name="remembered_password">Remembered password? <font color='#3AB0FF'><b> Login</b></font></string>
     <string name="login">Login</string>
@@ -136,4 +139,5 @@
     <string name="_30_minutes_snooze">30 minutes snooze</string>
     <string name="_15_minutes_snooze">15 minutes snooze</string>
     <string name="reminder">Reminder</string>
+    <string name="happiness_island">Happiness Island</string>
 </resources>

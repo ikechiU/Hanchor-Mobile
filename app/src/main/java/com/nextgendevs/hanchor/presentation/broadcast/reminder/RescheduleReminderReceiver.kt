@@ -43,6 +43,7 @@ class RescheduleReminderReceiver : BroadcastReceiver() {
     }
 
     private fun getEntityList(): List<Todo>? {
+        Log.d(TAG, "getEntityList: ${mySharedPreferences.getTodoList()}")
         return mySharedPreferences.getTodoList()
     }
 

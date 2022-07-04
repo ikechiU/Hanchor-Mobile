@@ -17,19 +17,19 @@ data class GratitudeEntity constructor(
 
     @ColumnInfo(name = GRATITUDE_ID)
     @PrimaryKey(autoGenerate = false)
-    var id: Long = 0,
+    val id: Long,
 
     @ColumnInfo(name = GRATITUDE_TITLE)
-    var gratitudeTitle: String = "",
+    val gratitudeTitle: String,
 
     @ColumnInfo(name = GRATITUDE_MESSAGE)
-    var gratitudeMessage: String = "",
+    val gratitudeMessage: String,
 
     @ColumnInfo(name = GRATITUDE_IMAGE_URL)
-    var gratitudeImageUrl: String = "",
+    val gratitudeImageUrl: String,
 
     @ColumnInfo(name = GRATITUDE_IMAGE_ID)
-    var gratitudeImageId: String = "0"
+    val gratitudeImageId: String
 )
 
 fun GratitudeEntity.toGratitude(): Gratitude {

@@ -125,7 +125,9 @@
             app:popExitAnim="@anim/slide_out_right"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true">
+
+        </action>
 
         <action
             android:id="@+id/action_affirmationsFragment_to_displayAffirmationFragment"
@@ -133,7 +135,19 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
             app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"/>
+            app:exitAnim="@anim/slide_out_left">
+
+            <argument
+                android:name="affirmationTitle"
+                app:nullable="true"
+                app:argType="string" />
+
+            <argument
+                android:name="affirmationMessage"
+                app:nullable="true"
+                app:argType="string" />
+
+        </action>
 
     </fragment>
 
@@ -184,6 +198,18 @@
         android:name="com.nextgendevs.hanchor.presentation.main.fragments.home.affirmations.display_affirmation.DisplayAffirmationFragment"
         android:label="fragment_display_affirmation"
         tools:layout="@layout/fragment_display_affirmation" >
+
+        <argument
+            android:name="affirmationTitle"
+            app:argType="string"
+            android:defaultValue="@null"
+            app:nullable="true"/>
+
+        <argument
+            android:name="affirmationMessage"
+            app:argType="string"
+            android:defaultValue="@null"
+            app:nullable="true"/>
 
         <action
             android:id="@+id/action_displayAffirmationFragment_to_affirmationsFragment"

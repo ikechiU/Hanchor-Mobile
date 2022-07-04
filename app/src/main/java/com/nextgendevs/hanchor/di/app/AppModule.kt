@@ -94,6 +94,10 @@ object AppModule {
     @AppScope
     fun provideAuthTokenDao(database: AppDatabase) = database.authTokenDao()
 
+    @Provides
+    @AppScope
+    fun provideAffirmationDao(database: AppDatabase) = database.affirmationDao()
+
 //
 //    @Provides
 //    @AppScope

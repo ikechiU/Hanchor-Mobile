@@ -117,11 +117,11 @@ class TodoViewModel @Inject constructor(
         state.value = state.value?.copy(isQueryExhausted = isExhausted)
     }
 
-    fun fetchTodos(limit: Int = 10, page: Int = 1) {
+    fun fetchTodos(page: Int = 1, limit: Int = 10) {
         resetPage()
         state.value?.let { todoState ->
 
-            fetchTodos.execute(limit, todoState.page).onEach { dataState ->
+            fetchTodos.execute(todoState.page, limit).onEach { dataState ->
                 state.value = todoState.copy(isLoading = dataState.isLoading)
 
                 dataState.data?.let { result ->
@@ -140,11 +140,11 @@ class TodoViewModel @Inject constructor(
         }
     }
 
-    fun fetchNextTodos(limit: Int = 10, page: Int = 1) {
+    fun fetchNextTodos(page: Int = 1, limit: Int = 10) {
         incrementPageNumber()
         state.value?.let { todoState ->
 
-            fetchTodos.execute(limit, todoState.page).onEach { dataState ->
+            fetchTodos.execute(todoState.page, limit).onEach { dataState ->
 //                state.value = todoState.copy(isLoading = dataState.isLoading)
 
                 dataState.data?.let { result ->

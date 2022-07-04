@@ -35,8 +35,8 @@ interface TodoApiInterface {
     suspend fun getTodos(
         @Header("Authorization") authorization: String,
         @Path("userId") userId: String,
-        @Query("limit") limit: Int,
-        @Query("page") page: Int
+        @Query("page") page: Int,
+        @Query("limit") limit: Int
     ): Response<List<TodoRest>>
 
     @DELETE("/hanchor/v1/users/{userId}/todos/{todoId}")

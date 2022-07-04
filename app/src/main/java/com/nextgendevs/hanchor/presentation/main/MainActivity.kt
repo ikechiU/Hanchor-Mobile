@@ -19,6 +19,7 @@ import com.nextgendevs.hanchor.databinding.ActivityMainBinding
 import com.nextgendevs.hanchor.presentation.BaseActivity
 import com.nextgendevs.hanchor.presentation.MainViewModel
 import com.nextgendevs.hanchor.presentation.utils.Constants
+import com.nextgendevs.hanchor.presentation.utils.displayToast
 import com.nextgendevs.hanchor.presentation.utils.processQueue
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -32,12 +33,20 @@ class MainActivity : BaseActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var bottomNavigationView: BottomNavigationView
     private val viewModel: MainViewModel by viewModels()
+    private var quote: String? = null
+    private var lifeHack: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        initFCM()
+
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.main_fragments_container) as NavHostFragment
+        navController = navHostFragment.navController
+        setupBottomNavigationView()
 
         when {
             intent.hasExtra(Constants.FCM_LINK_KEY) -> {
@@ -46,17 +55,18 @@ class MainActivity : BaseActivity() {
                     if (intent.getStringExtra(Constants.FCM_BODY_KEY) != null) {
                         if (intent.getStringExtra(Constants.FCM_LINK_KEY) != null) {
                             if(intent.getStringExtra(Constants.FCM_LINK_KEY) != "") {
-                                val data = intent.getStringExtra(Constants.FCM_LINK_KEY)!!
-                                val body = intent.getStringExtra(Constants.FCM_BODY_KEY)!!
+                                quote = intent.getStringExtra(Constants.FCM_BODY_KEY)!!
+                                lifeHack = intent.getStringExtra(Constants.FCM_LINK_KEY)!!
                                 val title = intent.getStringExtra(Constants.FCM_TITLE_KEY)!!
-
-                                Log.d(TAG, "data is: $data")
-                                Log.d(TAG, "body is: $body")
                                 Log.d(TAG, "title is: $title")
 
-                                Handler(Looper.getMainLooper()).post {
-                                    Toast.makeText(this, body, Toast.LENGTH_SHORT).show()
-                                }
+//                                bottomNavigationView.selectedItemId = R.id.nav_home
+
+//                                    val inflater = navHostFragment.navController.navInflater
+//                                    val graph = inflater.inflate(R.navigation.nav_home)
+//                                    graph.setStartDestination(R.id.homeFragment)
+//                                    navHostFragment.navController.graph = graph
+
                             }
                         }
                     }
@@ -64,20 +74,15 @@ class MainActivity : BaseActivity() {
             }
         }
 
-        initFCM()
-
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.main_fragments_container) as NavHostFragment
-        navController = navHostFragment.navController
-
-        setupBottomNavigationView()
-
 //        lifecycleScope.launch {
 //            appDataStoreManager.readValue(DataStoreKeys.USER)?.let { user ->
 //                Log.d(TAG, "onCreate: display $user")
 //            }
 //        }
     }
+
+    fun getQuote() = quote
+    fun getLifeHack() = lifeHack
 
     override fun displayProgressBar(isLoading: Boolean) {
         if(isLoading){

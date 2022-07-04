@@ -14,5 +14,9 @@ interface MainApiInterface {
         @Body updateUserRequest: UpdateUserRequest
     ): Response<UserRest>
 
-
+    @GET("/hanchor/v1/users/{userId}")
+    suspend fun getUser(
+        @Header("Authorization") authorization: String,
+        @Path("userId") userId: String
+    ): Response<UserRest>
 }

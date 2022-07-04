@@ -31,7 +31,7 @@ To build this project, you require:
 *   [Room](https://developer.android.com/training/data-storage/room)
 
 ## App Feature
-* Firebase Cloud Messaging - Implemented
+* Firebase Cloud Messaging - Implemented for Quotes and LifeHacks (Later to be changed to retrieve via API)
 * SplashScreen - Implemented
 * Onboarding - Implemented
 * Login/Registration/Forgot Password - Implemented
@@ -40,10 +40,9 @@ To build this project, you require:
 * Bottom Navigation - Implemented
 * Count your blessings (Gratitude) - Implemented
 * Post image using MultipartBody.Part - Implemented
-* Plan your day (Todo) Implmented 
+* Plan your day (Todo) Implemented with reminders.
 * Profile/Settings Menu in BottomNav - Implemented to add extra touch
-* Quote - Not yet implemented (UI ready)
-* LifeHack - Not yet implemented (UI ready)
+* Affirmations - Not yet implemented (UI ready)
 * Happiness Island - Not yet implemented (UI ready)
 * Dark Theme - Not yet implemented 
 * Shimmer Effect - Not yet implemented

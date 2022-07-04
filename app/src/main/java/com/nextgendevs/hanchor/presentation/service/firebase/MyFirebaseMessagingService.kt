@@ -55,7 +55,9 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         Log.d(TAG, "handleNow: $body")
         Log.d(TAG, "handleNow: $link")
         handler.post {
-            Toast.makeText(this, body, Toast.LENGTH_SHORT).show()
+            mySharedPreferences.storeStringValue(Constants.FCM_QUOTE_OF_THE_DAY, body)
+            mySharedPreferences.storeStringValue(Constants.FCM_LIFE_HACK, link)
+//            Toast.makeText(this, body, Toast.LENGTH_SHORT).show()
             mFCMNotification.setFCMNotification(title, body, link)
         }
 

@@ -24,6 +24,9 @@ class Constants {
 
 
 
+        const val FCM_QUOTE_OF_THE_DAY = "com.nextgendevs.constants_FCM_QUOTE_OF_THE_DAY"
+        const val FCM_LIFE_HACK = "com.nextgendevs.constants_FCM_LIFE_HACK"
+
         const val FCM_TOKEN = "com.nextgendevs.constants_FCM_TOKEN"
         const val SUBSCRIBE_TO_HANCHOR = "/topics/deals"
         const val FCM_TITLE_KEY = "title"
@@ -38,7 +41,7 @@ class Constants {
         const val SNOOZE_TODO_REMINDER_TASK = "com.nextgendevs.constants_SNOOZE_TODO_REMINDER_TASK"
         const val FIFTEEN_MINUTES = 900000L
         const val THIRTY_MINUTES = 1800000L
-        const val THREE_SECONDS = 3000L
+        const val FIVE_SECONDS = 5000L
         const val ONE_MINUTE = 60000L
         const val TWO_MINUTES = 120000L
 
@@ -52,32 +55,12 @@ class Constants {
         const val FCM_NOTIFICATION = 300557
 
         const val PI_TODO_REMINDER = 304400
-        const val PI_MORNING_ALARM = 3001
-        const val PI_REPEATING_MORNING_ALARM = 30011
-        const val PI_NIGHT_ALARM = 3002
-        const val PI_REPEATING_NIGHT_ALARM = 30022
 
         const val PI_TODO_REMINDER_SNOOZE = 388003
-        const val PI_MORNING_SNOOZE_ALARM = 3004
-        const val PI_NIGHT_SNOOZE_ALARM = 3005
 
         const val PI_REMINDER_BROADCAST = 300916
-        const val PI_MORNING_ALARM_START = 3007
-        const val PI_NIGHT_ALARM_START = 3008
 
         const val PI_SNOOZE_REMINDER_BROADCAST = 3009
-        const val PI_SNOOZE_MORNING_ALARM_FOREGROUND_SERVICE = 3010
-        const val PI_SNOOZE_NIGHT_ALARM_FOREGROUND_SERVICE = 3011
-
-        const val REMINDER_WORKER_ID = "com.nextgendevs.constants_REMINDER_WORKER_ID"
-        const val REMINDER_WORKER_EXISTING_TITLE = "com.nextgendevs.constants_REMINDER_WORKER_EXISTING_TITLE"
-        const val REMINDER_WORKER_PRESENT_TITLE = "com.nextgendevs.constants_REMINDER_WORKER_PRESENT_TITLE"
-        const val REMINDER_WORKER_EXISTING_LONG_TIME = "com.nextgendevs.constants_REMINDER_WORKER_EXISTING_LONG_TIME"
-        const val REMINDER_WORKER_PRESENT_LONG_TIME = "com.nextgendevs.constants_REMINDER_WORKER_PRESENT_LONG_TIME"
-        const val REMINDER_WORKER_KEY = "com.nextgendevs.constants_REMINDER_WORKER_KEY"
-        const val REMINDER_WORKER_INSERT = "com.nextgendevs.constants_REMINDER_WORKER_INSERT"
-        const val REMINDER_WORKER_UPDATE = "com.nextgendevs.constants_REMINDER_WORKER_UPDATE"
-        const val REMINDER_WORKER_DELETE = "com.nextgendevs.constants_REMINDER_WORKER_DELETE"
 
     }
 }

@@ -10,6 +10,7 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.google.gson.Gson
 import com.nextgendevs.hanchor.business.domain.models.Todo
 import com.nextgendevs.hanchor.business.domain.utils.StateMessageCallback
 import com.nextgendevs.hanchor.databinding.FragmentTodoBinding
@@ -78,6 +79,9 @@ class TodoFragment : BaseTodoFragment(), SwipeRefreshLayout.OnRefreshListener {
                     }
                 })
 
+            if (todoState.todoList.isNotEmpty()) {
+                mySharedPreferences.storeStringValue(Constants.LIST_OF_TODOS, Gson().toJson(todoState.todoList))
+            }
             todoListAdapter.apply {
                 submitList(list  = todoState.todoList)
             }
