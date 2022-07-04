@@ -27,7 +27,7 @@ To build this project, you require:
 *   [Glide](https://github.com/bumptech/glide)
 *   [Material Dialogs](https://github.com/afollestad/material-dialogs)
 *   [Android-Image-Cropper](https://github.com/CanHub/Android-Image-Cropper)
-*   [Shimmer-Effect](com.facebook.shimmer:shimmer:0.5.0)
+*   [Shimmer-Effect](http://facebook.github.io/shimmer-android)
 *   [Room](https://developer.android.com/training/data-storage/room)
 
 ## App Feature
