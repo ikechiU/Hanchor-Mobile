@@ -1,12 +1,14 @@
 package com.nextgendevs.hanchor.presentation.main
 
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -14,13 +16,10 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.FirebaseApp
 import com.nextgendevs.hanchor.R
-import com.nextgendevs.hanchor.business.domain.utils.StateMessageCallback
 import com.nextgendevs.hanchor.databinding.ActivityMainBinding
 import com.nextgendevs.hanchor.presentation.BaseActivity
 import com.nextgendevs.hanchor.presentation.MainViewModel
 import com.nextgendevs.hanchor.presentation.utils.Constants
-import com.nextgendevs.hanchor.presentation.utils.displayToast
-import com.nextgendevs.hanchor.presentation.utils.processQueue
 import dagger.hilt.android.AndroidEntryPoint
 
 private const val TAG = "AppDebug"
@@ -54,38 +53,47 @@ class MainActivity : BaseActivity() {
                 if (intent != null) {
                     if (intent.getStringExtra(Constants.FCM_BODY_KEY) != null) {
                         if (intent.getStringExtra(Constants.FCM_LINK_KEY) != null) {
-                            if(intent.getStringExtra(Constants.FCM_LINK_KEY) != "") {
+                            if (intent.getStringExtra(Constants.FCM_LINK_KEY) != "") {
                                 quote = intent.getStringExtra(Constants.FCM_BODY_KEY)!!
                                 lifeHack = intent.getStringExtra(Constants.FCM_LINK_KEY)!!
                                 val title = intent.getStringExtra(Constants.FCM_TITLE_KEY)!!
                                 Log.d(TAG, "title is: $title")
-
-//                                bottomNavigationView.selectedItemId = R.id.nav_home
-
-//                                    val inflater = navHostFragment.navController.navInflater
-//                                    val graph = inflater.inflate(R.navigation.nav_home)
-//                                    graph.setStartDestination(R.id.homeFragment)
-//                                    navHostFragment.navController.graph = graph
-
                             }
                         }
                     }
                 }
             }
         }
+    }
 
-//        lifecycleScope.launch {
-//            appDataStoreManager.readValue(DataStoreKeys.USER)?.let { user ->
-//                Log.d(TAG, "onCreate: display $user")
-//            }
-//        }
+    private val messageReceiver: BroadcastReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent) {
+
+            if (intent.hasExtra(Constants.FCM_LINK_KEY)) {
+                quote = intent.getStringExtra(Constants.FCM_BODY_KEY)!!
+                lifeHack = intent.getStringExtra(Constants.FCM_LINK_KEY)!!
+                navController.navigate(R.id.nav_home)
+            }
+
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        LocalBroadcastManager.getInstance(this)
+            .registerReceiver(messageReceiver, IntentFilter(Constants.LOCAL_BROADCAST_INTENT))
+    }
+
+    override fun onStop() {
+        super.onStop()
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(messageReceiver)
     }
 
     fun getQuote() = quote
     fun getLifeHack() = lifeHack
 
     override fun displayProgressBar(isLoading: Boolean) {
-        if(isLoading){
+        if (isLoading) {
             binding.progressBar.visibility = View.VISIBLE
         } else {
             binding.progressBar.visibility = View.GONE

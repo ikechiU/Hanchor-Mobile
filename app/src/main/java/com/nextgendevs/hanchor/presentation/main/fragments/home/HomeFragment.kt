@@ -46,8 +46,8 @@ class HomeFragment : BaseHomeFragment() {
         val quote = (requireActivity() as MainActivity).getQuote()
         val lifeHack = (requireActivity() as MainActivity).getLifeHack()
 
-        Log.d(TAG, "onViewCreated: quote $quote")
-        Log.d(TAG, "onViewCreated: lifeHack $lifeHack")
+        Log.d(TAG, "onViewCreated: quote 2 $quote")
+        Log.d(TAG, "onViewCreated: lifeHack 2 $lifeHack")
 
         if(quote != null && lifeHack != null) {
             binding.quote.text = quote

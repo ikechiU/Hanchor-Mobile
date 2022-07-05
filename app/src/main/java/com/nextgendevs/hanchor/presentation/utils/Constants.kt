@@ -27,6 +27,9 @@ class Constants {
         const val FCM_QUOTE_OF_THE_DAY = "com.nextgendevs.constants_FCM_QUOTE_OF_THE_DAY"
         const val FCM_LIFE_HACK = "com.nextgendevs.constants_FCM_LIFE_HACK"
 
+        const val LOCAL_BROADCAST_INTENT = "com.nextgendevs.constants_LOCAL_BROADCAST_INTENT"
+
+
         const val FCM_TOKEN = "com.nextgendevs.constants_FCM_TOKEN"
         const val SUBSCRIBE_TO_HANCHOR = "/topics/deals"
         const val FCM_TITLE_KEY = "title"

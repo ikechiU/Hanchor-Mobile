@@ -1,9 +1,11 @@
 package com.nextgendevs.hanchor.presentation.service.firebase
 
+import android.content.Intent
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.widget.Toast
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.nextgendevs.hanchor.presentation.utils.MySharedPreferences
@@ -20,9 +22,11 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     @Inject lateinit var mySharedPreferences: MySharedPreferences
     @Inject lateinit var mFCMNotification: FCMNotification
     private val handler = Handler(Looper.getMainLooper())
+    private var broadcaster: LocalBroadcastManager? = null
 
     override fun onCreate() {
         super.onCreate()
+        broadcaster = LocalBroadcastManager.getInstance(this)
         Log.d(TAG, "onCreate: MyFirebaseMessagingService $mySharedPreferences")
     }
 
@@ -51,14 +55,17 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         val body = remoteMessage.data[Constants.FCM_BODY_KEY]!!
         val link = remoteMessage.data[Constants.FCM_LINK_KEY]!!
 
-        Log.d(TAG, "handleNow: $title")
-        Log.d(TAG, "handleNow: $body")
-        Log.d(TAG, "handleNow: $link")
         handler.post {
             mySharedPreferences.storeStringValue(Constants.FCM_QUOTE_OF_THE_DAY, body)
             mySharedPreferences.storeStringValue(Constants.FCM_LIFE_HACK, link)
-//            Toast.makeText(this, body, Toast.LENGTH_SHORT).show()
+
             mFCMNotification.setFCMNotification(title, body, link)
+
+            val intent = Intent(Constants.LOCAL_BROADCAST_INTENT)
+            intent.putExtra(Constants.FCM_TITLE_KEY, title)
+            intent.putExtra(Constants.FCM_BODY_KEY, body)
+            intent.putExtra(Constants.FCM_LINK_KEY, link)
+            broadcaster?.sendBroadcast(intent)
         }
 
     }

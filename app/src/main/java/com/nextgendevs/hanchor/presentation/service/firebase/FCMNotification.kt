@@ -24,7 +24,7 @@ class FCMNotification @Inject constructor(@ApplicationContext val context: Conte
         val pendingIntent: PendingIntent? = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             PendingIntent.getActivity(context, Constants.FCM_NOTIFICATION, notificationIntent, PendingIntent.FLAG_MUTABLE)
         } else {
-            PendingIntent.getActivity(context, Constants.FCM_NOTIFICATION, notificationIntent, 0)
+            PendingIntent.getActivity(context, Constants.FCM_NOTIFICATION, notificationIntent, PendingIntent.FLAG_ONE_SHOT)
         }
         if (pendingIntent != null) {
             context.setNotification(pendingIntent, title, body)
