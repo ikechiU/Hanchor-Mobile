@@ -46,24 +46,6 @@ class MainActivity : BaseActivity() {
             supportFragmentManager.findFragmentById(R.id.main_fragments_container) as NavHostFragment
         navController = navHostFragment.navController
         setupBottomNavigationView()
-
-        when {
-            intent.hasExtra(Constants.FCM_LINK_KEY) -> {
-                val intent = this.intent
-                if (intent != null) {
-                    if (intent.getStringExtra(Constants.FCM_BODY_KEY) != null) {
-                        if (intent.getStringExtra(Constants.FCM_LINK_KEY) != null) {
-                            if (intent.getStringExtra(Constants.FCM_LINK_KEY) != "") {
-                                quote = intent.getStringExtra(Constants.FCM_BODY_KEY)!!
-                                lifeHack = intent.getStringExtra(Constants.FCM_LINK_KEY)!!
-                                val title = intent.getStringExtra(Constants.FCM_TITLE_KEY)!!
-                                Log.d(TAG, "title is: $title")
-                            }
-                        }
-                    }
-                }
-            }
-        }
     }
 
     private val messageReceiver: BroadcastReceiver = object : BroadcastReceiver() {
