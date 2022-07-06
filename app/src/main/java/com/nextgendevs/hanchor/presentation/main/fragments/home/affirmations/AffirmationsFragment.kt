@@ -1,5 +1,6 @@
 package com.nextgendevs.hanchor.presentation.main.fragments.home.affirmations
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import com.nextgendevs.hanchor.business.domain.utils.StateMessageCallback
 import com.nextgendevs.hanchor.databinding.FragmentAffirmationsBinding
 import com.nextgendevs.hanchor.presentation.MainViewModel
 import com.nextgendevs.hanchor.presentation.utils.Constants
+import com.nextgendevs.hanchor.presentation.utils.changeStatusBarColor
 import com.nextgendevs.hanchor.presentation.utils.processQueue
 import com.nextgendevs.hanchor.presentation.utils.safeNavigate
 
@@ -29,6 +31,8 @@ class AffirmationsFragment : BaseAffirmationsFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        activity?.changeStatusBarColor(Color.parseColor("#FFFFFF"), true)
 
         binding.navigateUp.setOnClickListener {
             val directions =
@@ -67,85 +71,85 @@ class AffirmationsFragment : BaseAffirmationsFragment() {
         binding.btnProsperity.setOnClickListener {
             val directions =
                 AffirmationsFragmentDirections.actionAffirmationsFragmentToDisplayAffirmationFragment(
-                    binding.btnProsperity.text.toString(), affirmationMessages[0])
+                    binding.btnProsperity.text.toString())
             Navigation.findNavController(it).safeNavigate(directions)
         }
         binding.btnLove.setOnClickListener {
             val directions =
                 AffirmationsFragmentDirections.actionAffirmationsFragmentToDisplayAffirmationFragment(
-                    binding.btnLove.text.toString(), affirmationMessages[1])
+                    binding.btnLove.text.toString())
             Navigation.findNavController(it).safeNavigate(directions)
         }
         binding.btnIam.setOnClickListener {
             val directions =
                 AffirmationsFragmentDirections.actionAffirmationsFragmentToDisplayAffirmationFragment(
-                    binding.btnIam.text.toString(), affirmationMessages[2])
+                    binding.btnIam.text.toString())
             Navigation.findNavController(it).safeNavigate(directions)
         }
         binding.btnFamily.setOnClickListener {
             val directions =
                 AffirmationsFragmentDirections.actionAffirmationsFragmentToDisplayAffirmationFragment(
-                    binding.btnFamily.text.toString(), affirmationMessages[3])
+                    binding.btnFamily.text.toString())
             Navigation.findNavController(it).safeNavigate(directions)
         }
         binding.btnSelfEsteem.setOnClickListener {
             val directions =
                 AffirmationsFragmentDirections.actionAffirmationsFragmentToDisplayAffirmationFragment(
-                    binding.btnSelfEsteem.text.toString(), affirmationMessages[4])
+                    binding.btnSelfEsteem.text.toString())
             Navigation.findNavController(it).safeNavigate(directions)
         }
         binding.btnSpiritual.setOnClickListener {
             val directions =
                 AffirmationsFragmentDirections.actionAffirmationsFragmentToDisplayAffirmationFragment(
-                    binding.btnSpiritual.text.toString(), affirmationMessages[5])
+                    binding.btnSpiritual.text.toString())
             Navigation.findNavController(it).safeNavigate(directions)
         }
         binding.btnBeauty.setOnClickListener {
             val directions =
                 AffirmationsFragmentDirections.actionAffirmationsFragmentToDisplayAffirmationFragment(
-                    binding.btnBeauty.text.toString(), affirmationMessages[6])
+                    binding.btnBeauty.text.toString())
             Navigation.findNavController(it).safeNavigate(directions)
         }
         binding.btnSuccess.setOnClickListener {
             val directions =
                 AffirmationsFragmentDirections.actionAffirmationsFragmentToDisplayAffirmationFragment(
-                    binding.btnSuccess.text.toString(), affirmationMessages[7])
+                    binding.btnSuccess.text.toString())
             Navigation.findNavController(it).safeNavigate(directions)
         }
         binding.btnRelationship.setOnClickListener {
             val directions =
                 AffirmationsFragmentDirections.actionAffirmationsFragmentToDisplayAffirmationFragment(
-                    binding.btnRelationship.text.toString(), affirmationMessages[8])
+                    binding.btnRelationship.text.toString())
             Navigation.findNavController(it).safeNavigate(directions)
         }
         binding.btnHealth.setOnClickListener {
             val directions =
                 AffirmationsFragmentDirections.actionAffirmationsFragmentToDisplayAffirmationFragment(
-                    binding.btnHealth.text.toString(), affirmationMessages[9])
+                    binding.btnHealth.text.toString())
             Navigation.findNavController(it).safeNavigate(directions)
         }
         binding.btnBusiness.setOnClickListener {
             val directions =
                 AffirmationsFragmentDirections.actionAffirmationsFragmentToDisplayAffirmationFragment(
-                    binding.btnBusiness.text.toString(), affirmationMessages[10])
+                    binding.btnBusiness.text.toString())
             Navigation.findNavController(it).safeNavigate(directions)
         }
         binding.btnSelfForgiveness.setOnClickListener {
             val directions =
                 AffirmationsFragmentDirections.actionAffirmationsFragmentToDisplayAffirmationFragment(
-                    binding.btnSelfForgiveness.text.toString(), affirmationMessages[11])
+                    binding.btnSelfForgiveness.text.toString())
             Navigation.findNavController(it).safeNavigate(directions)
         }
         binding.btnSelfImprovement.setOnClickListener {
             val directions =
                 AffirmationsFragmentDirections.actionAffirmationsFragmentToDisplayAffirmationFragment(
-                    binding.btnSelfImprovement.text.toString(), affirmationMessages[12])
+                    binding.btnSelfImprovement.text.toString())
             Navigation.findNavController(it).safeNavigate(directions)
         }
         binding.btnIcan.setOnClickListener {
             val directions =
                 AffirmationsFragmentDirections.actionAffirmationsFragmentToDisplayAffirmationFragment(
-                    binding.btnIcan.text.toString(), affirmationMessages[13])
+                    binding.btnIcan.text.toString())
             Navigation.findNavController(it).safeNavigate(directions)
         }
     }

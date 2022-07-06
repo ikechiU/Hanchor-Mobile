@@ -8,7 +8,7 @@ import com.nextgendevs.hanchor.business.domain.utils.StateMessage
 import com.nextgendevs.hanchor.business.domain.utils.UIComponentType
 import com.nextgendevs.hanchor.business.domain.utils.doesMessageAlreadyExistInQueue
 import com.nextgendevs.hanchor.business.usecase.main.AuthTokenCache
-import com.nextgendevs.hanchor.business.usecase.main.GetAffirmation
+import com.nextgendevs.hanchor.business.usecase.main.affirmation.GetAffirmation
 import com.nextgendevs.hanchor.business.usecase.main.GetUser
 import com.nextgendevs.hanchor.business.usecase.main.UpdateUsername
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -78,6 +78,7 @@ class MainViewModel @Inject constructor(
 
     fun getUser() {
         state.value?.let { mainState ->
+            state.value = mainState.copy(affirmations = emptyList())
 
             getUser.execute().onEach { dataState ->
                 state.value = mainState.copy(isLoading = dataState.isLoading)
@@ -101,6 +102,7 @@ class MainViewModel @Inject constructor(
 
     fun getAffirmation() {
         state.value?.let { mainState ->
+            state.value = mainState.copy(affirmationMessages = emptyList())
 
             getAffirmation.execute().onEach { dataState ->
                 state.value = mainState.copy(isLoading = dataState.isLoading)
@@ -122,6 +124,33 @@ class MainViewModel @Inject constructor(
             }.launchIn(viewModelScope)
         }
     }
+
+
+    fun getAffirmations(query: String) {
+        state.value?.let { mainState ->
+            state.value = mainState.copy(affirmations = emptyList())
+
+            getAffirmation.execute(query).onEach { dataState ->
+                state.value = mainState.copy(isLoading = dataState.isLoading)
+
+                dataState.data?.let { result ->
+                    Log.d(TAG, "getAffirmation: result is $result")
+                    state.value = mainState.copy(affirmations = result)
+                }
+
+                dataState.stateMessage?.let { stateMessage ->
+                    if (stateMessage.response.message == "Token expired") {
+                        state.value = mainState.copy(tokenExpired = true)
+                    }
+                    if (stateMessage.response.message == "No Internet.") {
+                        state.value = mainState.copy(errorMessage = "No Internet.")
+                    }
+                    onError(stateMessage)
+                }
+            }.launchIn(viewModelScope)
+        }
+    }
+
 
     private fun onError(stateMessage: StateMessage) {
         state.value?.let { mainState ->

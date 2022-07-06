@@ -195,7 +195,7 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:background="@color/accent"
+                    android:background="@drawable/quote_bkgrd"
                     android:layout_height="match_parent">
 
                     <TextView
@@ -204,9 +204,10 @@
                         android:layout_height="match_parent"
                         android:layout_margin="10dp"
                         android:fontFamily="@font/inter"
+                        android:textStyle="bold"
                         android:gravity="center"
                         android:text="@string/sample_quote"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/white" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
@@ -239,7 +240,7 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:background="@color/md_grey_300"
+                    android:background="@drawable/life_hack_bkgrd"
                     android:layout_height="match_parent">
 
                     <TextView
@@ -248,9 +249,10 @@
                         android:layout_height="match_parent"
                         android:layout_margin="10dp"
                         android:fontFamily="@font/inter"
+                        android:textStyle="bold"
                         android:gravity="center"
                         android:text="@string/sample_quote"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/white" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

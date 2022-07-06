@@ -27,4 +27,9 @@ interface AffirmationDao {
         limit: Int = 14
     ): List<AffirmationEntity>
 
+    @Query("SELECT * FROM affirmation_table WHERE affirmation_title = :query")
+    suspend fun fetchAffirmations(query: String): List<AffirmationEntity>
+//    @Query("SELECT * FROM affirmation_table")
+//    suspend fun fetchAffirmations(): List<AffirmationEntity>
+
 }

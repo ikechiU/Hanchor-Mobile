@@ -7,8 +7,12 @@ import android.media.RingtoneManager
 import android.os.Build
 import android.provider.Settings
 import android.util.Log
+import android.view.Window
+import android.view.WindowManager
 import androidx.annotation.RequiresApi
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.app.NotificationCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.callbacks.onDismiss
 import com.nextgendevs.hanchor.R
@@ -230,5 +234,21 @@ fun Activity.logoutUser(mySharedPreferences: MySharedPreferences) {
     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
     startActivity(intent)
     finish()
+}
+
+fun Activity.changeStatusBarColor(color: Int, isLight: Boolean) {
+    window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+    window.statusBarColor = color
+
+    WindowInsetsControllerCompat(window, window.decorView).isAppearanceLightStatusBars = isLight
+}
+
+fun Activity.setStatusBarGradiant(context: Context, drawable: Int) {
+    val window: Window = window
+    val background = AppCompatResources.getDrawable(context, drawable)
+    window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+    window.statusBarColor = resources.getColor(android.R.color.transparent)
+    window.navigationBarColor = resources.getColor(android.R.color.transparent)
+    window.setBackgroundDrawable(background)
 }
 

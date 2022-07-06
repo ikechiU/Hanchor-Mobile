@@ -77,6 +77,7 @@
     <string name="_16_50_pm">16:50 PM</string>
     <string name="add_gratitude">Click the + button below to\n start counting your blessings</string>
     <string name="add_todo">Click the + button to add your\n first task</string>
+    <string name="add_affirmation">Click the + button to add\n affirmation</string>
     <string name="my_affirmations">My Affirmations</string>
     <string name="hey">Hey,</string>
     <string name="i_have_more_than_enough">I have more than enough</string>
@@ -111,6 +112,7 @@
     <string name="about_body">This app encompasses two major features, a gratitude component that will be a platform that helps users feel better by allowing them to say how they feel and then receive some sort of feedback that makes them feel better, less worried, reduces anxiety, some special features we’ll be implementing is a goal-setting page and a random daily quote to users. The other component is a todo that enables users to add tasks, delete tasks and also know which tasks are completed or not. A special feature for the todo app will be a reminder feature.</string>
     <string name="terms_of_use_message">Hanchor has been designed to help inspire lives. Hence, you may use this app solely for your personal (non-commercial) good. We reserve all rights for the content of this app. So, do not write a software or another app that uses the program or data from Shift Schedule(OCP) whether it is done in exchange for money or not.</string>
     <string name="task_what_to_do">What would you like to do?</string>
+    <string name="affirmation_what_to">What affirmation would you like to add?</string>
     <string name="i_want_to">I want to...</string>
     <string name="when_do_you_want_to_perform_this_task">When do you want to perform this task?</string>
     <string name="choose_date_in_calender">Choose date in calender</string>
@@ -140,4 +142,7 @@
     <string name="_15_minutes_snooze">15 minutes snooze</string>
     <string name="reminder">Reminder</string>
     <string name="happiness_island">Happiness Island</string>
+    <string name="affirmations">affirmations</string>
+    <string name="six">6</string>
+    <string name="create_affirmation">Create Affirmation</string>
 </resources>
