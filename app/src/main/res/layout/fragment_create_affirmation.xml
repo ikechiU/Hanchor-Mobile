@@ -55,34 +55,14 @@
             app:layout_constraintTop_toBottomOf="@id/app_bar">
 
             <ImageView
-                android:id="@+id/delete_todo"
+                android:id="@+id/delete_affirmation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 android:src="@drawable/ic_delete"
-                android:visibility="gone"
+                android:visibility="invisible"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:fontFamily="@font/inter"
-                android:text="@string/affirmation_what_to"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/delete_todo" />
-
-            <CheckBox
-                android:id="@+id/is_completed"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="invisible"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/delete_todo" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/affirmation_container"
@@ -92,7 +72,7 @@
                 android:background="@drawable/card_stroke"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text">
+                app:layout_constraintTop_toBottomOf="@id/delete_affirmation">
 
                 <EditText
                     android:id="@+id/affirmation"

@@ -353,6 +353,14 @@
                 app:argType="string"
                 app:nullable="true" />
 
+            <argument
+                android:name="size"
+                app:argType="integer" />
+
+            <argument
+                android:name="position"
+                app:argType="integer" />
+
         </action>
 
     </fragment>
@@ -379,15 +387,62 @@
             app:argType="string"
             app:nullable="true" />
 
+        <argument
+            android:name="size"
+            app:argType="integer" />
+
+        <argument
+            android:name="position"
+            app:argType="integer" />
+
         <action
             android:id="@+id/action_createAffirmationFragment_to_displayAffirmationFragment"
             app:destination="@id/displayAffirmationFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
-            app:popUpTo="@+id/displayAffirmationFragment"
-            app:popUpToInclusive="true" />
+            app:popExitAnim="@anim/slide_out_right">
+
+            <argument
+                android:name="affirmationTitle"
+                app:argType="string"
+                app:nullable="true" />
+
+        </action>
+
+        <action
+            android:id="@+id/action_createAffirmationFragment_to_affirmationDetailsFragment"
+            app:destination="@id/affirmationDetailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right">
+
+
+            <argument
+                android:name="affirmationId"
+                app:argType="long" />
+
+            <argument
+                android:name="affirmationTitle"
+                app:argType="string"
+                app:nullable="true" />
+
+            <argument
+                android:name="affirmationMessage"
+                app:argType="string"
+                app:nullable="true" />
+
+            <argument
+                android:name="size"
+                app:argType="integer" />
+
+            <argument
+                android:name="position"
+                app:argType="integer" />
+
+
+        </action>
 
     </fragment>
 

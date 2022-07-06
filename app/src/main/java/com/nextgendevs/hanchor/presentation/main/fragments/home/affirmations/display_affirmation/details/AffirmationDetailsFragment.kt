@@ -30,9 +30,9 @@ class AffirmationDetailsFragment : BaseAffirmationDetailsFragment() {
     private var affirmations: List<String> = emptyList()
     private var ids: List<Long> = emptyList()
 
-    var id = 0L
-    var size = 0
-    var position = 0
+    private var id = 0L
+    private var size = 0
+    private var position = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -83,7 +83,7 @@ class AffirmationDetailsFragment : BaseAffirmationDetailsFragment() {
         binding.swinge.setOnClickListener {
             val directions =
                 AffirmationDetailsFragmentDirections.actionAffirmationDetailsFragmentToCreateAffirmationFragment(
-                    id, affirmationTitle, affirmationMessage
+                    id, affirmationTitle, affirmationMessage, size, position
                 )
             Navigation.findNavController(binding.root).safeNavigate(directions)
         }

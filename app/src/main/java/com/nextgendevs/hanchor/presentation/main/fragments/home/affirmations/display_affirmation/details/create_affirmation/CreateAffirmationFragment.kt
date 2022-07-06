@@ -1,24 +1,27 @@
 package com.nextgendevs.hanchor.presentation.main.fragments.home.affirmations.display_affirmation.details.create_affirmation
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.content.res.AppCompatResources
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import com.nextgendevs.hanchor.R
+import com.nextgendevs.hanchor.business.datasource.network.request.AffirmationRequest
+import com.nextgendevs.hanchor.business.domain.utils.AreYouSureCallback
 import com.nextgendevs.hanchor.business.domain.utils.StateMessageCallback
-import com.nextgendevs.hanchor.databinding.FragmentAffirmationDetailsBinding
 import com.nextgendevs.hanchor.databinding.FragmentCreateAffirmationBinding
-import com.nextgendevs.hanchor.presentation.main.fragments.home.affirmations.display_affirmation.details.AffirmationDetailsFragmentArgs
+import com.nextgendevs.hanchor.presentation.broadcast.reminder.deleteReminder
+import com.nextgendevs.hanchor.presentation.broadcast.reminder.scheduleReminder
 import com.nextgendevs.hanchor.presentation.main.fragments.home.affirmations.display_affirmation.details.AffirmationDetailsFragmentDirections
 import com.nextgendevs.hanchor.presentation.main.fragments.home.affirmations.display_affirmation.details.viewmodel.AffirmationViewModel
-import com.nextgendevs.hanchor.presentation.utils.displayToast
-import com.nextgendevs.hanchor.presentation.utils.processQueue
-import com.nextgendevs.hanchor.presentation.utils.safeNavigate
-import com.nextgendevs.hanchor.presentation.utils.setStatusBarGradiant
+import com.nextgendevs.hanchor.presentation.main.fragments.home.todo_list.create_todo.CreateTodoFragmentDirections
+import com.nextgendevs.hanchor.presentation.utils.*
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class CreateAffirmationFragment : BaseCreateAffirmationFragment() {
 
@@ -26,9 +29,39 @@ class CreateAffirmationFragment : BaseCreateAffirmationFragment() {
     private val binding: FragmentCreateAffirmationBinding get() = _binding!!
     private val viewModel: AffirmationViewModel by viewModels()
 
-    var affirmationTitle = ""
-    var affirmationId = 0L
-    var affirmationMessage = ""
+    private var affirmationTitle = ""
+    private var affirmationId = 0L
+    private var affirmationMessage = ""
+    private var size = 0
+    private var position = 0
+
+    private var shouldObserveOnce = false
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                areYouSure()
+            }
+        })
+    }
+
+    private fun OnBackPressedCallback.areYouSure() {
+        val fragment: String = if(affirmationId == 0L) "Display Affirmations" else "Affirmation Details"
+
+        activity?.areYouSureDialog("Navigate to $fragment", object : AreYouSureCallback {
+            override fun proceed() {
+                this@areYouSure.isEnabled = false
+                activity?.onBackPressed()
+            }
+
+            override fun cancel() {
+                Log.d(TAG, "cancel: pressed.")
+            }
+        })
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,9 +80,20 @@ class CreateAffirmationFragment : BaseCreateAffirmationFragment() {
         affirmationTitle = args.affirmationTitle!!
         affirmationId = args.affirmationId
         affirmationMessage = args.affirmationMessage!!
+        size = args.size
+        position = args.position
 
-        binding.affirmation.text = affirmationMessage
-        
+        if (affirmationId == 0L) {
+            binding.deleteAffirmation.visibility = View.INVISIBLE
+            binding.appBarTitle.text = getContext.getString(R.string.create_affirmation)
+        }
+        else {
+            binding.deleteAffirmation.visibility = View.VISIBLE
+            binding.appBarTitle.text = getContext.getString(R.string.update_affirmation)
+        }
+
+        binding.affirmation.setText(affirmationMessage)
+
         binding.navigateUp.setOnClickListener {
             val directions =
                 AffirmationDetailsFragmentDirections.actionAffirmationDetailsFragmentToDisplayAffirmationFragment()
@@ -58,27 +102,65 @@ class CreateAffirmationFragment : BaseCreateAffirmationFragment() {
 
         binding.btnSave.setOnClickListener {
             if (binding.affirmation.text.isNotEmpty()) {
+                affirmationMessage = binding.affirmation.text.toString()
+                val affirmation = AffirmationRequest(affirmationTitle, affirmationMessage)
 
-                viewModel.insertAffirmation()
+                if (affirmationId == 0L) viewModel.insertAffirmation(affirmation)
+                else viewModel.updateAffirmation(affirmationId, affirmation)
+
                 subscribeObservers()
             } else {
                 getContext.displayToast("Add an affirmation")
             }
         }
 
+        binding.navigateUp.setOnClickListener {
+            if (affirmationId == 0L) {
+                navigateToDisplayAffirmationFragment()
+            } else {
+                navigateToAffirmationDetailsFragment()
+            }
+        }
+
+        binding.deleteAffirmation.setOnClickListener {
+            viewModel.deleteAffirmation(affirmationId)
+            subscribeObservers()
+        }
 
     }
 
     private fun subscribeObservers() {
-        viewModel.state.observe(viewLifecycleOwner) { mainState ->
-            if (mainState.affirmations.isNotEmpty()) {
-                ids = mainState.affirmations.map { it.id }
-                affirmations = mainState.affirmations.map { it.affirmation }
+        viewModel.state.observe(viewLifecycleOwner) { affirmationState ->
+            uiCommunicationListener.displayProgressBar(affirmationState.isLoading)
+
+            if (affirmationState.tokenExpired) {
+                activity?.logoutUser(mySharedPreferences)
+            }
+
+            if (affirmationState.insertResult != 0L) {
+                if (shouldObserveOnce) {
+                    navigateToDisplayAffirmationFragment()
+                    shouldObserveOnce = false
+                }
+            }
+
+            if (affirmationState.updateResult != 0) {
+                if (shouldObserveOnce) {
+                    navigateToAffirmationDetailsFragment()
+                    shouldObserveOnce = false
+                }
+            }
+
+            if (affirmationState.deleteResult != 0) {
+                if (shouldObserveOnce) {
+                    navigateToDisplayAffirmationFragment()
+                    shouldObserveOnce = false
+                }
             }
 
             processQueue(
                 context = context,
-                queue = mainState.queue,
+                queue = affirmationState.queue,
                 stateMessageCallback = object : StateMessageCallback {
                     override fun removeMessageFromStack() {
                         viewModel.onRemoveHeadFromQuery()
@@ -86,6 +168,20 @@ class CreateAffirmationFragment : BaseCreateAffirmationFragment() {
                 })
 
         }
+    }
+
+    private fun navigateToDisplayAffirmationFragment() {
+        val directions =
+            CreateAffirmationFragmentDirections.actionCreateAffirmationFragmentToDisplayAffirmationFragment(affirmationTitle)
+        Navigation.findNavController(binding.root).safeNavigate(directions)
+    }
+
+    private fun navigateToAffirmationDetailsFragment() {
+        val directions =
+            CreateAffirmationFragmentDirections.actionCreateAffirmationFragmentToAffirmationDetailsFragment(
+                affirmationId, affirmationTitle, affirmationMessage, size, position
+            )
+        Navigation.findNavController(binding.root).safeNavigate(directions)
     }
 
     override fun onDestroyView() {

@@ -26,7 +26,7 @@ private const val ERROR_ALL_VALIDATION_FIELDS_REQUIRED = "All fields required"
 private const val LOGIN_ERROR_403 = "Incorrect credential."
 private const val ERROR_INVALID_EMAIL = "Invalid email address"
 
-class Login @Inject constructor(
+class Login (
     private val appDataStoreManager: AppDataStore,
     private val authTokenCache: AuthTokenDao,
     private val service: AuthApiInterface,

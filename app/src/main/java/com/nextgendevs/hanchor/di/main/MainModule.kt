@@ -6,9 +6,9 @@ import com.nextgendevs.hanchor.business.datasource.cache.main.affirmation.Affirm
 import com.nextgendevs.hanchor.business.datasource.network.main.MainApiInterface
 import com.nextgendevs.hanchor.business.usecase.CheckNetwork
 import com.nextgendevs.hanchor.business.usecase.main.AuthTokenCache
-import com.nextgendevs.hanchor.business.usecase.main.GetAffirmation
 import com.nextgendevs.hanchor.business.usecase.main.GetUser
 import com.nextgendevs.hanchor.business.usecase.main.UpdateUsername
+import com.nextgendevs.hanchor.business.usecase.main.affirmation.GetAffirmation
 import com.nextgendevs.hanchor.presentation.utils.MySharedPreferences
 import dagger.Module
 import dagger.Provides

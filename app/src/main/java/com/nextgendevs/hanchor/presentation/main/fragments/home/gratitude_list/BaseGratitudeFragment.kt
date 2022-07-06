@@ -2,9 +2,11 @@ package com.nextgendevs.hanchor.presentation.main.fragments.home.gratitude_list
 
 import android.content.Context
 import android.util.Log
+import com.bumptech.glide.RequestManager
 import com.nextgendevs.hanchor.presentation.UICommunicationListener
 import com.nextgendevs.hanchor.presentation.main.fragments.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 abstract class BaseGratitudeFragment : BaseFragment(){

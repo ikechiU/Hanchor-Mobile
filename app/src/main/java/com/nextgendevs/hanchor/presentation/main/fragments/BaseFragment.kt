@@ -9,7 +9,6 @@ import javax.inject.Inject
 @AndroidEntryPoint
 open class BaseFragment: Fragment() {
     @Inject lateinit var mySharedPreferences: MySharedPreferences
-    @Inject lateinit var glideRequestManager: RequestManager
 
     val TAG = "AppDebug"
 }

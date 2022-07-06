@@ -67,7 +67,7 @@ class DisplayAffirmationFragment : BaseDisplayAffirmationFragment(),
         binding.fab.setOnClickListener {
             val directions =
                 DisplayAffirmationFragmentDirections.actionDisplayAffirmationFragmentToCreateAffirmationFragment(
-                    0L, binding.titleAffirmation.text.toString(), ""
+                    0L, binding.titleAffirmation.text.toString(), "", 0, 0
                 )
             Navigation.findNavController(binding.root).safeNavigate(directions)
         }

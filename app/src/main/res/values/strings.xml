@@ -145,4 +145,5 @@
     <string name="affirmations">affirmations</string>
     <string name="six">6</string>
     <string name="create_affirmation">Create Affirmation</string>
+    <string name="update_affirmation">Update Affirmation</string>
 </resources>
