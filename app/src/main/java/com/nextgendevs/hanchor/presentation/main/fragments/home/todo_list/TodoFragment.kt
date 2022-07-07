@@ -64,10 +64,12 @@ class TodoFragment : BaseTodoFragment(), SwipeRefreshLayout.OnRefreshListener {
                 activity?.logoutUser(mySharedPreferences)
             }
 
-            if (todoState.todoList.isNotEmpty()) {
-                binding.emptyTodo.visibility = View.GONE
-            } else {
-                binding.emptyTodo.visibility = View.VISIBLE
+            if (!todoState.isLoading){
+                if (todoState.todoList.isNotEmpty()) {
+                    binding.emptyTodo.visibility = View.GONE
+                } else {
+                    binding.emptyTodo.visibility = View.VISIBLE
+                }
             }
 
             processQueue(

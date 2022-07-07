@@ -66,13 +66,13 @@ class TodoListAdapter(private val context: Context) :
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is TodoViewHolder -> {
-                when ((position + 1) % 5) {
-                    0 -> holder.card.setCardBackgroundColor(Color.parseColor("#D3DDD5"))
-                    1 ->  holder.card.setCardBackgroundColor(Color.parseColor("#4CAF50"))
-                    2 ->  holder.card.setCardBackgroundColor(Color.parseColor("#FFEB3B"))
-                    3 ->  holder.card.setCardBackgroundColor(Color.parseColor("#B1E0FF"))
-                    4 ->  holder.card.setCardBackgroundColor(Color.parseColor("#FFB1B1"))
-                }
+//                when ((position + 1) % 5) {
+//                    0 -> holder.card.setCardBackgroundColor(Color.parseColor("#D3DDD5"))
+//                    1 ->  holder.card.setCardBackgroundColor(Color.parseColor("#4CAF50"))
+//                    2 ->  holder.card.setCardBackgroundColor(Color.parseColor("#FFEB3B"))
+//                    3 ->  holder.card.setCardBackgroundColor(Color.parseColor("#B1E0FF"))
+//                    4 ->  holder.card.setCardBackgroundColor(Color.parseColor("#FFB1B1"))
+//                }
                 holder.bind(differ.currentList[position])
             }
         }

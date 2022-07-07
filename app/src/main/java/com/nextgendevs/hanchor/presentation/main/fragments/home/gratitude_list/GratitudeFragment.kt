@@ -64,10 +64,12 @@ class GratitudeFragment : BaseGratitudeFragment(), SwipeRefreshLayout.OnRefreshL
                 activity?.logoutUser(mySharedPreferences)
             }
 
-            if (gratitudeState.gratitudeList.isNotEmpty()) {
-                binding.emptyGratitude.visibility = View.GONE
-            } else {
-                binding.emptyGratitude.visibility = View.VISIBLE
+            if (!gratitudeState.isLoading){
+                if (gratitudeState.gratitudeList.isNotEmpty()) {
+                    binding.emptyGratitude.visibility = View.GONE
+                } else {
+                    binding.emptyGratitude.visibility = View.VISIBLE
+                }
             }
 
             processQueue(

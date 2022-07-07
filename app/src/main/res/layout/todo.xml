@@ -16,14 +16,16 @@
             android:id="@+id/card_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            app:cardElevation="2dp"
             android:layout_margin="10dp"
-            android:elevation="8dp"
+            android:elevation="2dp"
+            app:cardBackgroundColor="#F0F0F0"
             app:cardCornerRadius="10dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="15dp">
+                android:layout_margin="10dp">
 
                 <TextView
                     android:id="@+id/date"
@@ -34,40 +36,8 @@
                     android:textSize="14sp"
                     android:gravity="center"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="@id/is_completed"/>
-
-                <ImageView
-                    android:visibility="gone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/more"
-                    android:src="@drawable/ic_more"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
-
-                <CheckBox
-                    android:id="@+id/is_completed"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:enabled="false"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/todo_task"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_marginTop="10dp"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    app:layout_constraintTop_toBottomOf="@id/is_completed"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:textColor="@color/black"
-                    android:text="@string/sample_gratitude"
-                    android:maxLines="4"
-                    android:padding="7dp" />
 
                 <TextView
                     android:id="@+id/time"
@@ -76,17 +46,34 @@
                     android:fontFamily="@font/inter"
                     android:text="@string/_16_50_pm"
                     android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginTop="10dp"
-                    app:layout_constraintTop_toBottomOf="@id/todo_task" />
+                    android:layout_marginStart="7dp"
+                    app:layout_constraintStart_toEndOf="@id/date"
+                    app:layout_constraintTop_toTopOf="@id/date" />
 
-<!--                <CheckBox-->
-<!--                    android:id="@+id/is_completed"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    app:layout_constraintEnd_toEndOf="parent"-->
-<!--                    android:enabled="false"-->
-<!--                    app:layout_constraintTop_toBottomOf="@id/todo_task" />-->
+                <CheckBox
+                    android:id="@+id/is_completed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/checkbox_tint"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:enabled="false"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+                <TextView
+                    android:id="@+id/todo_task"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    app:layout_constraintTop_toBottomOf="@id/date"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/is_completed"
+                    android:textColor="@color/black"
+                    android:text="@string/sample_gratitude"
+                    android:maxLines="4" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

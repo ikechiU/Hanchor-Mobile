@@ -36,6 +36,7 @@ class CreateAffirmationFragment : BaseCreateAffirmationFragment() {
     private var position = 0
 
     private var shouldObserveOnce = false
+    private lateinit var navigationListener: NavigationListener
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -96,7 +97,7 @@ class CreateAffirmationFragment : BaseCreateAffirmationFragment() {
 
         binding.navigateUp.setOnClickListener {
             val directions =
-                AffirmationDetailsFragmentDirections.actionAffirmationDetailsFragmentToDisplayAffirmationFragment()
+                AffirmationDetailsFragmentDirections.actionAffirmationDetailsFragmentToDisplayAffirmationFragment(affirmationTitle)
             Navigation.findNavController(binding.root).safeNavigate(directions)
         }
 
@@ -127,6 +128,15 @@ class CreateAffirmationFragment : BaseCreateAffirmationFragment() {
             subscribeObservers()
         }
 
+        setupNavigationListener(object: NavigationListener{
+            override fun navigateToDisplay() {
+                navigateToDisplayAffirmationFragment()
+            }
+            override fun navigateToDetails() {
+                navigateToAffirmationDetailsFragment()
+            }
+        })
+
     }
 
     private fun subscribeObservers() {
@@ -139,21 +149,21 @@ class CreateAffirmationFragment : BaseCreateAffirmationFragment() {
 
             if (affirmationState.insertResult != 0L) {
                 if (shouldObserveOnce) {
-                    navigateToDisplayAffirmationFragment()
+                    navigationListener.navigateToDisplay()
                     shouldObserveOnce = false
                 }
             }
 
             if (affirmationState.updateResult != 0) {
                 if (shouldObserveOnce) {
-                    navigateToAffirmationDetailsFragment()
+                    navigationListener.navigateToDetails()
                     shouldObserveOnce = false
                 }
             }
 
             if (affirmationState.deleteResult != 0) {
                 if (shouldObserveOnce) {
-                    navigateToDisplayAffirmationFragment()
+                    navigationListener.navigateToDisplay()
                     shouldObserveOnce = false
                 }
             }
@@ -189,4 +199,13 @@ class CreateAffirmationFragment : BaseCreateAffirmationFragment() {
         _binding = null
     }
 
+    private fun setupNavigationListener(navigationListener: NavigationListener) {
+        this.navigationListener = navigationListener
+    }
+
+}
+
+interface NavigationListener {
+    fun navigateToDisplay()
+    fun navigateToDetails()
 }

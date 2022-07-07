@@ -43,115 +43,114 @@ class AffirmationsFragment : BaseAffirmationsFragment() {
         val username = mySharedPreferences.getStoredString(Constants.USERNAME)
         binding.username.text = username
 
-        viewModel.getAffirmation()
-        subscribeObservers()
-
+        affirmationClick()
     }
 
-    private fun subscribeObservers() {
-        viewModel.state.observe(viewLifecycleOwner) { mainState ->
-            Log.d(TAG, "subscribeObservers: mainState.affirmationMessages ${mainState.affirmationMessages}")
-
-            if (mainState.affirmationMessages.isNotEmpty()) {
-                affirmationClick(mainState.affirmationMessages)
-            }
-
-            processQueue(
-                context = context,
-                queue = mainState.queue,
-                stateMessageCallback = object : StateMessageCallback {
-                    override fun removeMessageFromStack() {
-                        viewModel.onRemoveHeadFromQuery()
-                    }
-                })
-        }
-    }
-
-    private fun affirmationClick(affirmationMessages: List<String>) {
+    private fun affirmationClick() {
         binding.btnProsperity.setOnClickListener {
             val directions =
                 AffirmationsFragmentDirections.actionAffirmationsFragmentToDisplayAffirmationFragment(
                     binding.btnProsperity.text.toString())
             Navigation.findNavController(it).safeNavigate(directions)
+            affirmationCLick()
         }
         binding.btnLove.setOnClickListener {
             val directions =
                 AffirmationsFragmentDirections.actionAffirmationsFragmentToDisplayAffirmationFragment(
                     binding.btnLove.text.toString())
             Navigation.findNavController(it).safeNavigate(directions)
+            affirmationCLick()
         }
         binding.btnIam.setOnClickListener {
             val directions =
                 AffirmationsFragmentDirections.actionAffirmationsFragmentToDisplayAffirmationFragment(
                     binding.btnIam.text.toString())
             Navigation.findNavController(it).safeNavigate(directions)
+            affirmationCLick()
         }
         binding.btnFamily.setOnClickListener {
             val directions =
                 AffirmationsFragmentDirections.actionAffirmationsFragmentToDisplayAffirmationFragment(
                     binding.btnFamily.text.toString())
             Navigation.findNavController(it).safeNavigate(directions)
+            affirmationCLick()
         }
         binding.btnSelfEsteem.setOnClickListener {
             val directions =
                 AffirmationsFragmentDirections.actionAffirmationsFragmentToDisplayAffirmationFragment(
                     binding.btnSelfEsteem.text.toString())
             Navigation.findNavController(it).safeNavigate(directions)
+            affirmationCLick()
         }
         binding.btnSpiritual.setOnClickListener {
             val directions =
                 AffirmationsFragmentDirections.actionAffirmationsFragmentToDisplayAffirmationFragment(
                     binding.btnSpiritual.text.toString())
             Navigation.findNavController(it).safeNavigate(directions)
+            affirmationCLick()
         }
         binding.btnBeauty.setOnClickListener {
             val directions =
                 AffirmationsFragmentDirections.actionAffirmationsFragmentToDisplayAffirmationFragment(
                     binding.btnBeauty.text.toString())
             Navigation.findNavController(it).safeNavigate(directions)
+            affirmationCLick()
         }
         binding.btnSuccess.setOnClickListener {
             val directions =
                 AffirmationsFragmentDirections.actionAffirmationsFragmentToDisplayAffirmationFragment(
                     binding.btnSuccess.text.toString())
             Navigation.findNavController(it).safeNavigate(directions)
+            affirmationCLick()
         }
         binding.btnRelationship.setOnClickListener {
             val directions =
                 AffirmationsFragmentDirections.actionAffirmationsFragmentToDisplayAffirmationFragment(
                     binding.btnRelationship.text.toString())
             Navigation.findNavController(it).safeNavigate(directions)
+            affirmationCLick()
         }
         binding.btnHealth.setOnClickListener {
             val directions =
                 AffirmationsFragmentDirections.actionAffirmationsFragmentToDisplayAffirmationFragment(
                     binding.btnHealth.text.toString())
             Navigation.findNavController(it).safeNavigate(directions)
+            affirmationCLick()
         }
         binding.btnBusiness.setOnClickListener {
             val directions =
                 AffirmationsFragmentDirections.actionAffirmationsFragmentToDisplayAffirmationFragment(
                     binding.btnBusiness.text.toString())
             Navigation.findNavController(it).safeNavigate(directions)
+            affirmationCLick()
         }
         binding.btnSelfForgiveness.setOnClickListener {
             val directions =
                 AffirmationsFragmentDirections.actionAffirmationsFragmentToDisplayAffirmationFragment(
                     binding.btnSelfForgiveness.text.toString())
             Navigation.findNavController(it).safeNavigate(directions)
+            affirmationCLick()
         }
         binding.btnSelfImprovement.setOnClickListener {
             val directions =
                 AffirmationsFragmentDirections.actionAffirmationsFragmentToDisplayAffirmationFragment(
                     binding.btnSelfImprovement.text.toString())
             Navigation.findNavController(it).safeNavigate(directions)
+            affirmationCLick()
         }
         binding.btnIcan.setOnClickListener {
             val directions =
                 AffirmationsFragmentDirections.actionAffirmationsFragmentToDisplayAffirmationFragment(
                     binding.btnIcan.text.toString())
             Navigation.findNavController(it).safeNavigate(directions)
+            affirmationCLick()
         }
+    }
+
+    private fun affirmationCLick() {
+        uiCommunicationListener.displayProgressBar(true)
+        binding.root.alpha = 0.5F
+        binding.root.isEnabled = false
     }
 
 
