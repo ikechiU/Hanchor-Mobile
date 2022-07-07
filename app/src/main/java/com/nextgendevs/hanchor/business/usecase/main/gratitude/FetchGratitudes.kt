@@ -23,7 +23,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class FetchGratitudes @Inject constructor(
+class FetchGratitudes (
     private val appDataStoreManager: AppDataStore,
     val service: GratitudeApiInterface,
     val cache: GratitudeDao,

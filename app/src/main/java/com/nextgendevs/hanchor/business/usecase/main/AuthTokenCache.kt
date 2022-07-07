@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.flow
 import java.lang.Exception
 import javax.inject.Inject
 
-class AuthTokenCache @Inject constructor(
+class AuthTokenCache (
     private val authTokenCache: AuthTokenDao
 ) {
     fun execute(): Flow<DataState<String>> = flow {

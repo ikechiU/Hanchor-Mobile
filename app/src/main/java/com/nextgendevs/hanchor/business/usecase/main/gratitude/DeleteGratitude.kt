@@ -19,7 +19,7 @@ import okhttp3.RequestBody
 import retrofit2.http.Part
 import javax.inject.Inject
 
-class DeleteGratitude @Inject constructor(
+class DeleteGratitude (
     private val appDataStoreManager: AppDataStore,
     val service: GratitudeApiInterface,
     val cache: GratitudeDao,

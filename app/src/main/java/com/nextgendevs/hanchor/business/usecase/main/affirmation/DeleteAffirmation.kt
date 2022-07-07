@@ -17,7 +17,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class DeleteAffirmation @Inject constructor(
+class DeleteAffirmation (
     private val appDataStoreManager: AppDataStore,
     val service: AffirmationApiInterface,
     val cache: AffirmationDao,

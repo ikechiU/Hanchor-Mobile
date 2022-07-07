@@ -22,7 +22,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class UpdateTodo @Inject constructor(
+class UpdateTodo (
     private val appDataStoreManager: AppDataStore,
     val service: TodoApiInterface,
     val cache: TodoDao,

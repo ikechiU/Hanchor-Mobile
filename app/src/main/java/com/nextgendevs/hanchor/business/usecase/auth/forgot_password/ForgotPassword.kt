@@ -18,7 +18,7 @@ private const val ERROR_INVALID_EMAIL = "Invalid email address"
 private const val ERROR_ALL_VALIDATION_FIELDS_REQUIRED = "All fields required"
 private const val TAG = "AppDebug"
 
-class ForgotPassword @Inject constructor(private val service: AuthApiInterface) {
+class ForgotPassword (private val service: AuthApiInterface) {
 
     fun execute(email: String): Flow<DataState<String>> = flow {
 

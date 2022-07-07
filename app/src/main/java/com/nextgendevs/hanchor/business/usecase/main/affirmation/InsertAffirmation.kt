@@ -24,7 +24,7 @@ import javax.inject.Inject
 
 private const val TAG = "AppDebug"
 
-class InsertAffirmation @Inject constructor(
+class InsertAffirmation (
     private val appDataStoreManager: AppDataStore,
     val service: AffirmationApiInterface,
     val cache: AffirmationDao,

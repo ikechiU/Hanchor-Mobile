@@ -21,7 +21,7 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import javax.inject.Inject
 
-class InsertGratitude @Inject constructor(
+class InsertGratitude (
     private val appDataStoreManager: AppDataStore,
     val service: GratitudeApiInterface,
     val cache: GratitudeDao,

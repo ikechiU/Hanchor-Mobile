@@ -19,7 +19,7 @@ private const val ERROR_INVALID_EMAIL = "Invalid email address"
 private const val ERROR_ALL_VALIDATION_FIELDS_REQUIRED = "All fields required"
 private const val TAG = "AppDebug"
 
-class Register @Inject constructor(private val service: AuthApiInterface) {
+class Register (private val service: AuthApiInterface) {
 
     fun execute(fullName: String, email: String, password: String): Flow<DataState<UserRest>> =
         flow {

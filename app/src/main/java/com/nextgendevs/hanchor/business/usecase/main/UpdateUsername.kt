@@ -20,7 +20,7 @@ import javax.inject.Inject
 
 private const val USERNAME_REQUIRED = "Username required"
 
-class UpdateUsername @Inject constructor(
+class UpdateUsername (
     val appDataStoreManager: AppDataStore,
     val service: MainApiInterface,
     val mySharedPreferences: MySharedPreferences,

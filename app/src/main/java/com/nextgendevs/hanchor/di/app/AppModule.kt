@@ -18,7 +18,6 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
-import java.util.logging.Level
 import javax.inject.Singleton
 
 @Module
@@ -40,16 +39,21 @@ object AppModule {
         return CheckNetwork(application)
     }
 
+    @Singleton
     @Provides
-    @AppScope
     fun provideOkhttpClient(): OkHttpClient {
         val okHttpClientBuilder = OkHttpClient.Builder()
         val logger = HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY }
         okHttpClientBuilder.addNetworkInterceptor { chain ->
-            chain.proceed(chain.request()
-                .newBuilder()
-                .header("User-Agent","Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36")
-                .build())
+            chain.proceed(
+                chain.request()
+                    .newBuilder()
+                    .header(
+                        "User-Agent",
+                        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36"
+                    )
+                    .build()
+            )
         }.addNetworkInterceptor(logger)
             .addInterceptor(HttpLoggingInterceptor())
             .connectTimeout(15, TimeUnit.MINUTES)
@@ -59,8 +63,9 @@ object AppModule {
     }
 
 
+
+    @Singleton
     @Provides
-    @AppScope
     fun provideRetrofit(client: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
@@ -72,8 +77,8 @@ object AppModule {
     @Provides
     fun provideFirebaseInstance(): FirebaseMessaging = FirebaseMessaging.getInstance()
 
+    @Singleton
     @Provides
-    @AppScope
     fun provideAppDatabase(
         @ApplicationContext context: Context
     ) = Room.databaseBuilder(
@@ -82,29 +87,20 @@ object AppModule {
         APP_DATABASE_NAME
     ).build()
 
+    @Singleton
     @Provides
-    @AppScope
     fun provideGratitudeDao(database: AppDatabase) = database.gratitudeDao()
 
+    @Singleton
     @Provides
-    @AppScope
     fun provideTodoDao(database: AppDatabase) = database.todoDao()
 
+    @Singleton
     @Provides
-    @AppScope
     fun provideAuthTokenDao(database: AppDatabase) = database.authTokenDao()
 
+    @Singleton
     @Provides
-    @AppScope
     fun provideAffirmationDao(database: AppDatabase) = database.affirmationDao()
 
-//
-//    @Provides
-//    @AppScope
-//    fun provideReminderDao(database: AppDatabase) = database.reminderDao()
-//
-//    @Provides
-//    @AppScope
-//    fun provideGoogleFormApi(retrofit: Retrofit): GoogleFormApi =
-//        retrofit.create(GoogleFormApi::class.java)
 }

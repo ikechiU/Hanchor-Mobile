@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 private const val USERNAME_REQUIRED = "Username required"
 
-class GetAffirmation @Inject constructor(
+class GetAffirmation (
     val cache: AffirmationDao
 ) {
 

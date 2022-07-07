@@ -21,7 +21,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class UpdateAffirmation @Inject constructor(
+class UpdateAffirmation (
     private val appDataStoreManager: AppDataStore,
     val service: AffirmationApiInterface,
     val cache: AffirmationDao,

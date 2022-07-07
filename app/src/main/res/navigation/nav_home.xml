@@ -321,7 +321,7 @@
             android:name="position"
             app:argType="integer" />
 
-        <action
+          <action
             android:id="@+id/action_affirmationDetailsFragment_to_displayAffirmationFragment"
             app:destination="@id/displayAffirmationFragment"
             app:enterAnim="@anim/slide_in_right"

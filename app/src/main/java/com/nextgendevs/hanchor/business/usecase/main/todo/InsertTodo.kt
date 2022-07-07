@@ -27,7 +27,7 @@ import javax.inject.Inject
 
 private const val TAG = "AppDebug"
 
-class InsertTodo @Inject constructor(
+class InsertTodo (
     private val appDataStoreManager: AppDataStore,
     private val authTokenCache: AuthTokenDao,
     val service: TodoApiInterface,

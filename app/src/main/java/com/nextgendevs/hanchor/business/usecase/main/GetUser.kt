@@ -27,7 +27,7 @@ import javax.inject.Inject
 
 private const val USERNAME_REQUIRED = "Username required"
 
-class GetUser @Inject constructor(
+class GetUser (
     val cache: AffirmationDao,
     val appDataStoreManager: AppDataStore,
     val service: MainApiInterface,
@@ -42,7 +42,6 @@ class GetUser @Inject constructor(
         if(!checkNetwork.isInternetAvailable) {
             throw Exception("No Internet.")
         } else {
-//            val token = mySharedPreferences.getStoredString(Constants.AUTH_TOKEN)
 
             var auth = ""
             appDataStoreManager.readValue(DataStoreKeys.USER)?.let {
