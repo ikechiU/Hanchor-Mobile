@@ -51,10 +51,13 @@ To build this project, you require:
 <h4 align="center">
 <img src="https://res.cloudinary.com/dpxkejiyy/image/upload/v1656733350/NextGenDevs/2022_07_02_04.41.24_yxf6cn.jpg" width="30%" vspace="10" hspace="10">
 <img src="https://res.cloudinary.com/dpxkejiyy/image/upload/v1656732433/NextGenDevs/2022_07_02_03.45.01_pf4zg5.jpg" width="30%" vspace="10" hspace="10">
-<img src="https://res.cloudinary.com/dpxkejiyy/image/upload/v1656732432/NextGenDevs/2022_07_02_03.41.24_qfom8o.jpg" width="30%" vspace="10" hspace="10">
-<img src="https://res.cloudinary.com/dpxkejiyy/image/upload/v1656732432/NextGenDevs/2022_07_02_04.20.34_jwjyma.jpg" width="30%" vspace="10" hspace="10">
+<img src="https://res.cloudinary.com/dpxkejiyy/image/upload/v1657322664/NextGenDevs/2022_07_09_00.19.22_iupinw.jpg" width="30%" vspace="10" hspace="10">
 <img src="https://res.cloudinary.com/dpxkejiyy/image/upload/v1656732433/NextGenDevs/2022_07_02_03.42.23_xzwax9.jpg" width="30%" vspace="10" hspace="10">
 <img src="https://res.cloudinary.com/dpxkejiyy/image/upload/v1656732434/NextGenDevs/2022_07_02_03.41.46_eskeke.jpg" width="30%" vspace="10" hspace="10">
+<img src="https://res.cloudinary.com/dpxkejiyy/image/upload/v1657322664/NextGenDevs/2022_07_09_00.18.59_utz0at.jpg" width="30%" vspace="10" hspace="10">
+<img src="https://res.cloudinary.com/dpxkejiyy/image/upload/v1657322663/NextGenDevs/2022_07_09_00.18.36_mmbra6.jpg" width="30%" vspace="10" hspace="10">
+<img src="https://res.cloudinary.com/dpxkejiyy/image/upload/v1657322663/NextGenDevs/2022_07_09_00.18.11_smryhb.jpg" width="30%" vspace="10" hspace="10">
+<img src="https://res.cloudinary.com/dpxkejiyy/image/upload/v1657322662/NextGenDevs/2022_07_09_00.18.21_h1uufq.jpg" width="30%" vspace="10" hspace="10">
 
 
 ## Other Projects
