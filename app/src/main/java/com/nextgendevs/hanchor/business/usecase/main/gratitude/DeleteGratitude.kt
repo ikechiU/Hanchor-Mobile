@@ -16,6 +16,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import okhttp3.RequestBody
+import retrofit2.HttpException
 import retrofit2.http.Part
 import javax.inject.Inject
 
@@ -60,6 +61,10 @@ class DeleteGratitude (
                             Response("Token expired", UIComponentType.Toast, MessageType.Success)
                         )
                     )
+                }
+
+                if (operationResult.code() != 401) {
+                    throw HttpException(operationResult)
                 }
             }
 

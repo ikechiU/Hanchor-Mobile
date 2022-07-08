@@ -33,6 +33,7 @@ class AffirmationDetailsFragment : BaseAffirmationDetailsFragment() {
     private var id = 0L
     private var size = 0
     private var position = 0
+    private var affirmationMessage: String? = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,10 +45,11 @@ class AffirmationDetailsFragment : BaseAffirmationDetailsFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        uiCommunicationListener.hideSoftKeyboard()
 
         val bundle = arguments ?: return
         val args = AffirmationDetailsFragmentArgs.fromBundle(bundle)
-        val affirmationMessage = args.affirmationMessage
+        affirmationMessage = args.affirmationMessage
         size = args.size
         position = args.position
         affirmationTitle = args.affirmationTitle!!
@@ -92,7 +94,8 @@ class AffirmationDetailsFragment : BaseAffirmationDetailsFragment() {
 
     private fun updateVariable(position: Int) {
         id = ids[position]
-        binding.affirmation.text = affirmations[position]
+        affirmationMessage = affirmations[position]
+        binding.affirmation.text = affirmationMessage
         setStatusBarAndBackgroundColor()
         setPreviousNextButton()
     }

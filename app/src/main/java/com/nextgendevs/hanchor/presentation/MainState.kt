@@ -8,6 +8,7 @@ data class MainState (
     val isLoading: Boolean = false,
     val updateResult: String = "",
     val deleteResult: Int = 0,
+    val userDetails: List<String> = emptyList(),
     val affirmationMessages: List<String> = emptyList(),
     val affirmations: List<Affirmation> = emptyList(),
     val authToken: String = "",

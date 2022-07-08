@@ -12,6 +12,7 @@ import com.nextgendevs.hanchor.business.domain.utils.UIComponentType
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
+import retrofit2.HttpException
 import java.lang.Exception
 import javax.inject.Inject
 
@@ -37,18 +38,24 @@ class Register (private val service: AuthApiInterface) {
             val userRequest =
                 UserRequest(fullName, fullName, fullName, email, password)
 
-            val registerResponse = service.register(userRequest)
+            val response = service.register(userRequest)
 
-            emit(
-                DataState.data(
-                    response = Response(
-                        "Successful registration",
-                        UIComponentType.Toast,
-                        MessageType.None
-                    ),
-                    data = registerResponse
+            if(response.isSuccessful) {
+                val registrationResponse = response.body()!!
+                emit(
+                    DataState.data(
+                        response = Response(
+                            "Successful registration",
+                            UIComponentType.Toast,
+                            MessageType.None
+                        ),
+                        data = registrationResponse
+                    )
                 )
-            )
+
+            } else {
+                throw HttpException(response)
+            }
 
         }.catch { e ->
             emit(handleUseCaseException(e))

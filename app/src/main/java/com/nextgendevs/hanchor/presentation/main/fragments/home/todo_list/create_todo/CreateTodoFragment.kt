@@ -129,10 +129,18 @@ class CreateTodoFragment : BaseCreateTodoFragment() {
     }
 
     private fun deleteTodo() {
-        Log.d(TAG, "deleteTodo: delete")
-        mySharedPreferences.storeLongValue(Constants.TODO_UPDATE_ID_LOCAL, _id)
-        viewModel.deleteTodo(_id)
-        subscribeObservers()
+        getContext.areYouSureDialog("Delete Todo", object : AreYouSureCallback {
+            override fun proceed() {
+                Log.d(TAG, "deleteTodo: delete")
+                viewModel.deleteTodo(_id)
+                subscribeObservers()
+            }
+
+            override fun cancel() {
+                Log.d(TAG, "cancel: pressed.")
+            }
+        })
+
     }
 
     private fun saveTodo() {

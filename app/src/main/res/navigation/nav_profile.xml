@@ -8,6 +8,19 @@
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.nextgendevs.hanchor.presentation.main.fragments.profile.ProfileFragment"
-        android:label="@string/profile" />
+        android:label="@string/profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_updateProfileFragment"
+            app:destination="@id/updateProfileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/updateProfileFragment"
+        android:name="com.nextgendevs.hanchor.presentation.main.fragments.profile.update.UpdateProfileFragment"
+        android:label="fragment_update_profile"
+        tools:layout="@layout/fragment_update_profile" >
+        <action
+            android:id="@+id/action_updateProfileFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
 
 </navigation>

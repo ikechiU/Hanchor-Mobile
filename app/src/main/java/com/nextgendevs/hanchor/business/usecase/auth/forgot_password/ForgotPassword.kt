@@ -11,6 +11,7 @@ import com.nextgendevs.hanchor.business.domain.utils.UIComponentType
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
+import retrofit2.HttpException
 import java.lang.Exception
 import javax.inject.Inject
 
@@ -36,15 +37,20 @@ class ForgotPassword (private val service: AuthApiInterface) {
             PasswordResetRequestModel(email)
 
         val response = service.forgotPassword(passwordResetRequestModel)
-        val result = response.operationResult
+        if (response.isSuccessful) {
+            val result = response.body()?.operationResult!!
 
-        emit(
-            DataState.data(
-                response = Response(
-                    "Password reset link sent to your email.", UIComponentType.Dialog, MessageType.Info
-                ), data = result
+            emit(
+                DataState.data(
+                    response = Response(
+                        "Password reset link sent to your email.", UIComponentType.Dialog, MessageType.Info
+                    ), data = result
+                )
             )
-        )
+
+        } else {
+            throw HttpException(response)
+        }
 
     }.catch { e ->
         emit(handleUseCaseException(e))

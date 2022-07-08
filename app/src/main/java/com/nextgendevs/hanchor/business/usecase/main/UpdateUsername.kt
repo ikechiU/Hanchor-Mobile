@@ -1,5 +1,6 @@
 package com.nextgendevs.hanchor.business.usecase.main
 
+import android.util.Log
 import com.nextgendevs.hanchor.business.datasource.cache.datastore.AppDataStore
 import com.nextgendevs.hanchor.business.datasource.cache.datastore.DataStoreKeys
 import com.nextgendevs.hanchor.business.datasource.network.main.MainApiInterface
@@ -16,6 +17,7 @@ import com.nextgendevs.hanchor.presentation.utils.MySharedPreferences
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
+import retrofit2.HttpException
 import javax.inject.Inject
 
 private const val USERNAME_REQUIRED = "Username required"
@@ -35,7 +37,6 @@ class UpdateUsername (
         if(!checkNetwork.isInternetAvailable) {
             throw Exception("No Internet.")
         } else {
-//            val token = mySharedPreferences.getStoredString(Constants.AUTH_TOKEN)
 
             var auth = ""
             appDataStoreManager.readValue(DataStoreKeys.USER)?.let {
@@ -51,12 +52,10 @@ class UpdateUsername (
             if (response.isSuccessful) {
                 val updateResponse = response.body()!!
 
-                updateResponse.email
-
-                DataState.data(
-                    response = null,
-                    data = updateResponse
+                emit(
+                    DataState.data(response = null, data = updateResponse)
                 )
+
             } else {
                 if (response.code() == 401) {
                     emit(
@@ -65,6 +64,58 @@ class UpdateUsername (
                         )
                     )
                 }
+            }
+        }
+
+    }.catch { e ->
+        emit(handleUseCaseException(e))
+    }
+
+
+    fun execute(fullname: String, username: String): Flow<DataState<List<String>>> = flow {
+        mySharedPreferences.storeStringValue(Constants.USERNAME, username)
+
+        emit(DataState.loading<List<String>>())
+
+        if(!checkNetwork.isInternetAvailable) {
+            throw Exception("No Internet.")
+        } else {
+
+            var auth = ""
+            appDataStoreManager.readValue(DataStoreKeys.USER)?.let {
+                auth = it
+            }
+            val userId = mySharedPreferences.getStoredString(Constants.USERID)
+
+            val updateUserRequest = UpdateUserRequest(fullname, fullname, username)
+
+            val response = service.updateUser(auth, userId, updateUserRequest)
+
+            if (response.isSuccessful) {
+                val updateResponse = response.body()!!
+
+                val updatedFullname = updateResponse.firstname!!
+                val updatedUsername = updateResponse.username!!
+
+                val userDetails: List<String> = arrayListOf(updatedFullname, updatedUsername)
+
+                emit(
+                    DataState.data(response = null, data = userDetails)
+                )
+
+            } else {
+                if (response.code() == 401) {
+                    emit(
+                        DataState.error(
+                            Response("Token expired", UIComponentType.Toast, MessageType.Success)
+                        )
+                    )
+                }
+
+                if (response.code() != 401) {
+                    throw HttpException(response)
+                }
+
             }
         }
 

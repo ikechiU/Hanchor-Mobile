@@ -15,9 +15,9 @@ interface AuthApiInterface {
     suspend fun login(@Body loginRequestModel: LoginRequestModel): Response<Void>
 
     @POST("/hanchor/v1/users")
-    suspend fun register(@Body userRequest: UserRequest): UserRest
+    suspend fun register(@Body userRequest: UserRequest): Response<UserRest>
 
     @POST("/hanchor/password-reset-request")
-    suspend fun forgotPassword(@Body passwordResetRequestModel: PasswordResetRequestModel): OperationResult
+    suspend fun forgotPassword(@Body passwordResetRequestModel: PasswordResetRequestModel): Response<OperationResult>
 
 }

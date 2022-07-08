@@ -204,8 +204,16 @@ class CreateGratitudeFragment : BaseCreateGratitudeFragment() {
     }
 
     private fun deleteGratitude() {
-        viewModel.deleteGratitude(_id, imageId)
-        subscribeObservers()
+        getContext.areYouSureDialog("Delete blessing", object : AreYouSureCallback {
+            override fun proceed() {
+                viewModel.deleteGratitude(_id, imageId)
+                subscribeObservers()
+            }
+
+            override fun cancel() {
+                Log.d(TAG, "cancel: pressed.")
+            }
+        })
     }
 
     private fun navigateToGratitudeFragment() {

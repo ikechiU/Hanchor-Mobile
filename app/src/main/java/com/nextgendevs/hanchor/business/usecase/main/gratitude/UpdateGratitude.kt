@@ -19,6 +19,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import retrofit2.HttpException
 import javax.inject.Inject
 
 class UpdateGratitude (
@@ -71,12 +72,9 @@ class UpdateGratitude (
                             Response("Token expired", UIComponentType.Toast, MessageType.Success)
                         )
                     )
-                } else {
-                    emit(
-                        DataState.error(
-                            Response(response.errorBody().toString(), UIComponentType.Toast, MessageType.Success)
-                        )
-                    )
+                }
+                if (response.code() != 401) {
+                    throw HttpException(response)
                 }
             }
         }

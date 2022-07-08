@@ -19,6 +19,7 @@ import com.nextgendevs.hanchor.presentation.utils.MySharedPreferences
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
+import retrofit2.HttpException
 import javax.inject.Inject
 
 class FetchGratitude (
@@ -59,6 +60,10 @@ class FetchGratitude (
                             Response("Token expired", UIComponentType.Toast, MessageType.Success)
                         )
                     )
+                }
+
+                if (response.code() != 401) {
+                    throw HttpException(response)
                 }
             }
 

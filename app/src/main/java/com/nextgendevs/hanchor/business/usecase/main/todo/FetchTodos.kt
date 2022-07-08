@@ -19,6 +19,7 @@ import com.nextgendevs.hanchor.presentation.utils.MySharedPreferences
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
+import retrofit2.HttpException
 import javax.inject.Inject
 
 class FetchTodos (
@@ -67,17 +68,9 @@ class FetchTodos (
                             Response("Token expired", UIComponentType.Toast, MessageType.Success)
                         )
                     )
-                } else {
-
-                    emit(
-                        DataState.data(null, cache.fetchTodos(page, limit).map { it.toTodo() })
-                    )
-
-                    emit(
-                        DataState.error(
-                            Response(response.errorBody().toString(), UIComponentType.Toast, MessageType.Error)
-                        )
-                    )
+                }
+                if (response.code() != 401) {
+                    throw HttpException(response)
                 }
             }
 

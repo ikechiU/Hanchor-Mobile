@@ -1,5 +1,6 @@
 package com.nextgendevs.hanchor.presentation.main.fragments.home
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,9 +13,7 @@ import com.nextgendevs.hanchor.business.domain.utils.StateMessageCallback
 import com.nextgendevs.hanchor.databinding.FragmentHomeBinding
 import com.nextgendevs.hanchor.presentation.MainViewModel
 import com.nextgendevs.hanchor.presentation.main.MainActivity
-import com.nextgendevs.hanchor.presentation.utils.Constants
-import com.nextgendevs.hanchor.presentation.utils.processQueue
-import com.nextgendevs.hanchor.presentation.utils.safeNavigate
+import com.nextgendevs.hanchor.presentation.utils.*
 import kotlin.text.Typography.quote
 
 class HomeFragment : BaseHomeFragment() {
@@ -32,6 +31,7 @@ class HomeFragment : BaseHomeFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        activity?.setStatusBarGradiant(getContext, R.drawable.ic_white_bkgrd)
         uiCommunicationListener.displayProgressBar(false)
 
         if (mySharedPreferences.getStoredString(Constants.FCM_QUOTE_OF_THE_DAY) == "") {

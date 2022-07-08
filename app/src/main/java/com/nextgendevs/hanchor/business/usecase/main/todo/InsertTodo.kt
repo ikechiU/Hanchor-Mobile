@@ -22,6 +22,7 @@ import com.nextgendevs.hanchor.presentation.utils.setDefaultTodoId
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
+import retrofit2.HttpException
 import java.lang.Exception
 import javax.inject.Inject
 
@@ -94,12 +95,9 @@ class InsertTodo (
                                 Response("Token expired", UIComponentType.Toast, MessageType.Success)
                             )
                         )
-                    } else {
-                        emit(
-                            DataState.error(
-                                Response("ERROR", UIComponentType.Toast, MessageType.Success)
-                            )
-                        )
+                    }
+                    if (response.code() != 401) {
+                        throw HttpException(response)
                     }
                 }
             } catch (e: Exception) {

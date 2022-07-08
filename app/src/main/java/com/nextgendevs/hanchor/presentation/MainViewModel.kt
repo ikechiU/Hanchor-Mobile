@@ -76,6 +76,30 @@ class MainViewModel @Inject constructor(
         }
     }
 
+    fun updateUser(fullname: String, username: String) {
+        state.value?.let { mainState ->
+
+            updateUsername.execute(fullname, username).onEach { dataState ->
+                state.value = mainState.copy(isLoading = dataState.isLoading)
+
+                dataState.data?.let { result ->
+                    Log.d(TAG, "updateUser: $result")
+                    state.value = mainState.copy(userDetails = result)
+                }
+
+                dataState.stateMessage?.let { stateMessage ->
+                    if (stateMessage.response.message == "Token expired") {
+                        state.value = mainState.copy(tokenExpired = true)
+                    }
+                    if (stateMessage.response.message == "No Internet.") {
+                        state.value = mainState.copy(errorMessage = "No Internet.")
+                    }
+                    onError(stateMessage)
+                }
+            }.launchIn(viewModelScope)
+        }
+    }
+
     fun getUser() {
         state.value?.let { mainState ->
             state.value = mainState.copy(affirmations = emptyList())

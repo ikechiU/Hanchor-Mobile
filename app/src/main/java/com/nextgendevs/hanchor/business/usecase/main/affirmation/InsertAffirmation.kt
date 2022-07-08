@@ -19,6 +19,7 @@ import com.nextgendevs.hanchor.presentation.utils.MySharedPreferences
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
+import retrofit2.HttpException
 import java.lang.Exception
 import javax.inject.Inject
 
@@ -67,11 +68,7 @@ class InsertAffirmation (
                             )
                         )
                     } else {
-                        emit(
-                            DataState.error(
-                                Response("ERROR", UIComponentType.Toast, MessageType.Success)
-                            )
-                        )
+                        throw HttpException(response)
                     }
                 }
             } catch (e: Exception) {

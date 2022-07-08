@@ -18,6 +18,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import okhttp3.Headers
+import retrofit2.HttpException
 import java.lang.Exception
 import javax.inject.Inject
 
@@ -82,6 +83,10 @@ class Login (
         } else {
             if(loginResponse.code() == 403) {
                 throw Exception(LOGIN_ERROR_403)
+            }
+
+            if (loginResponse.code() != 403) {
+                throw HttpException(loginResponse)
             }
         }
 

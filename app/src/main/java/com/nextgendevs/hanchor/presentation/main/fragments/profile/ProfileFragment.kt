@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import com.nextgendevs.hanchor.databinding.FragmentProfileBinding
 import com.nextgendevs.hanchor.presentation.utils.Constants
+import com.nextgendevs.hanchor.presentation.utils.safeNavigate
 
 class ProfileFragment : BaseProfileFragment() {
     private var _binding: FragmentProfileBinding? = null
@@ -34,6 +36,12 @@ class ProfileFragment : BaseProfileFragment() {
 
         val userId = mySharedPreferences.getStoredString(Constants.USERID)
         binding.userid.text = userId
+
+        binding.swinge.setOnClickListener {
+            val directions =
+                ProfileFragmentDirections.actionProfileFragmentToUpdateProfileFragment()
+            Navigation.findNavController(binding.root).safeNavigate(directions)
+        }
 
     }
 

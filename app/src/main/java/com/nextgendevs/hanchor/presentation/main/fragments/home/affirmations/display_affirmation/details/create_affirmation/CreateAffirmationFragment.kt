@@ -1,5 +1,6 @@
 package com.nextgendevs.hanchor.presentation.main.fragments.home.affirmations.display_affirmation.details.create_affirmation
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -35,9 +36,7 @@ class CreateAffirmationFragment : BaseCreateAffirmationFragment() {
     private var size = 0
     private var position = 0
 
-    private var shouldObserveOnce = false
-    private lateinit var navigationListener: NavigationListener
-
+    private var shouldObserveOnce = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,6 +73,7 @@ class CreateAffirmationFragment : BaseCreateAffirmationFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        activity?.setStatusBarGradiant(getContext, R.drawable.ic_white_bkgrd)
 
         val bundle = arguments ?: return
         val args = CreateAffirmationFragmentArgs.fromBundle(bundle)
@@ -102,6 +102,8 @@ class CreateAffirmationFragment : BaseCreateAffirmationFragment() {
         }
 
         binding.btnSave.setOnClickListener {
+            uiCommunicationListener.hideSoftKeyboard()
+
             if (binding.affirmation.text.isNotEmpty()) {
                 affirmationMessage = binding.affirmation.text.toString()
                 val affirmation = AffirmationRequest(affirmationTitle, affirmationMessage)
@@ -124,18 +126,17 @@ class CreateAffirmationFragment : BaseCreateAffirmationFragment() {
         }
 
         binding.deleteAffirmation.setOnClickListener {
-            viewModel.deleteAffirmation(affirmationId)
-            subscribeObservers()
-        }
+            getContext.areYouSureDialog("Delete affirmation", object : AreYouSureCallback {
+                override fun proceed() {
+                    viewModel.deleteAffirmation(affirmationId)
+                    subscribeObservers()
+                }
 
-        setupNavigationListener(object: NavigationListener{
-            override fun navigateToDisplay() {
-                navigateToDisplayAffirmationFragment()
-            }
-            override fun navigateToDetails() {
-                navigateToAffirmationDetailsFragment()
-            }
-        })
+                override fun cancel() {
+                    Log.d(TAG, "cancel: pressed.")
+                }
+            })
+        }
 
     }
 
@@ -149,21 +150,21 @@ class CreateAffirmationFragment : BaseCreateAffirmationFragment() {
 
             if (affirmationState.insertResult != 0L) {
                 if (shouldObserveOnce) {
-                    navigationListener.navigateToDisplay()
+                    navigateToDisplayAffirmationFragment()
                     shouldObserveOnce = false
                 }
             }
 
             if (affirmationState.updateResult != 0) {
                 if (shouldObserveOnce) {
-                    navigationListener.navigateToDetails()
+                    navigateToAffirmationDetailsFragment()
                     shouldObserveOnce = false
                 }
             }
 
             if (affirmationState.deleteResult != 0) {
                 if (shouldObserveOnce) {
-                    navigationListener.navigateToDisplay()
+                    navigateToDisplayAffirmationFragment()
                     shouldObserveOnce = false
                 }
             }
@@ -199,13 +200,4 @@ class CreateAffirmationFragment : BaseCreateAffirmationFragment() {
         _binding = null
     }
 
-    private fun setupNavigationListener(navigationListener: NavigationListener) {
-        this.navigationListener = navigationListener
-    }
-
-}
-
-interface NavigationListener {
-    fun navigateToDisplay()
-    fun navigateToDetails()
 }
