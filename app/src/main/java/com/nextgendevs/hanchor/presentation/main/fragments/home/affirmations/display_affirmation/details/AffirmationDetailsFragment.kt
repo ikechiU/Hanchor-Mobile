@@ -94,6 +94,7 @@ class AffirmationDetailsFragment : BaseAffirmationDetailsFragment() {
                     R.id.delete -> {
                         getContext.areYouSureDialog("Delete affirmation", object : AreYouSureCallback {
                             override fun proceed() {
+                                shouldObserveOnce =  true
                                 affirmationViewModel.deleteAffirmation(id)
                                 subscribeAffirmationObservers()
                             }
@@ -131,6 +132,7 @@ class AffirmationDetailsFragment : BaseAffirmationDetailsFragment() {
 
             if (affirmationState.deleteResult != 0) {
                 if (shouldObserveOnce) {
+                    Log.d(TAG, "subscribeAffirmationObservers: result is ${affirmationState.deleteResult}")
                     if (size > 1) {
                         size--
                         if(position == affirmations.size - 1) {

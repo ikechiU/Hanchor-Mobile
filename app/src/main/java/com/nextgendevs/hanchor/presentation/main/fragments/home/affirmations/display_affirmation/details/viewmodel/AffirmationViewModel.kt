@@ -5,9 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nextgendevs.hanchor.business.datasource.network.request.AffirmationRequest
-import com.nextgendevs.hanchor.business.domain.utils.StateMessage
-import com.nextgendevs.hanchor.business.domain.utils.UIComponentType
-import com.nextgendevs.hanchor.business.domain.utils.doesMessageAlreadyExistInQueue
+import com.nextgendevs.hanchor.business.domain.utils.*
 import com.nextgendevs.hanchor.business.usecase.main.affirmation.DeleteAffirmation
 import com.nextgendevs.hanchor.business.usecase.main.affirmation.InsertAffirmation
 import com.nextgendevs.hanchor.business.usecase.main.affirmation.UpdateAffirmation
@@ -80,6 +78,7 @@ class AffirmationViewModel @Inject constructor(
                 state.value = affirmationState.copy(isLoading = dataState.isLoading)
 
                 dataState.data?.let { result ->
+                    Log.d(TAG, "deleteAffirmation: result is $result")
                     state.value = affirmationState.copy(isLoading = false)
                     state.value = affirmationState.copy(deleteResult = result)
                 }
