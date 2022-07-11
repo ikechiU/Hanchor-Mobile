@@ -60,10 +60,10 @@
     <string name="welcome">Welcome,</string>
     <string name="sojimi">Sojimi</string>
     <string name="home_text">What would you like to do today?</string>
-    <string name="count_my_n_blessings">Count my \n blessings</string>
-    <string name="life_n_planner">Life \n planner</string>
-    <string name="happines_n_island">Happines \n island</string>
-    <string name="my_n_affirmations">My \n Affirmations</string>
+    <string name="count_my_n_blessings">Count my \nblessings</string>
+    <string name="life_n_planner">Life \nplanner</string>
+    <string name="happines_n_island">Happiness \nisland</string>
+    <string name="my_n_affirmations">My \nAffirmations</string>
     <string name="quote_of_the_day">Quote of the day</string>
     <string name="sample_quote">“I’m not a man of preacher of love. am a war, am a fight, am Inbadoski Bahose. Violence shall spread”</string>
     <string name="life_hack">Life hack</string>

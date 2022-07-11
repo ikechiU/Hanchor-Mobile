@@ -13,6 +13,7 @@ import com.nextgendevs.hanchor.databinding.FragmentSettingsBinding
 import com.nextgendevs.hanchor.presentation.auth.AuthActivity
 import com.nextgendevs.hanchor.presentation.utils.Constants
 import com.nextgendevs.hanchor.presentation.utils.logoutUser
+import com.nextgendevs.hanchor.presentation.utils.setStatusBarGradiant
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -30,6 +31,7 @@ class SettingsFragment : BaseSettingsFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        activity?.setStatusBarGradiant(getContext, R.drawable.ic_white_bkgrd)
         uiCommunicationListener.displayProgressBar(false)
 
         val copyrightIcon = getContext.resources.getString(R.string.copyright_c)

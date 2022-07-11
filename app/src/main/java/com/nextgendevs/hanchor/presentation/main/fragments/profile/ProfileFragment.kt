@@ -5,9 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
+import com.nextgendevs.hanchor.R
 import com.nextgendevs.hanchor.databinding.FragmentProfileBinding
 import com.nextgendevs.hanchor.presentation.utils.Constants
 import com.nextgendevs.hanchor.presentation.utils.safeNavigate
+import com.nextgendevs.hanchor.presentation.utils.setStatusBarGradiant
 
 class ProfileFragment : BaseProfileFragment() {
     private var _binding: FragmentProfileBinding? = null
@@ -23,6 +25,7 @@ class ProfileFragment : BaseProfileFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        activity?.setStatusBarGradiant(getContext, R.drawable.ic_white_bkgrd)
         uiCommunicationListener.displayProgressBar(false)
 
         val fullname = mySharedPreferences.getStoredString(Constants.FIRSTNAME)
