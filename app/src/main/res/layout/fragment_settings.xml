@@ -104,6 +104,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:visibility="gone"
                         android:id="@+id/dark_mode_container"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -240,12 +241,14 @@
                     </LinearLayout>
 
                     <View
+                        android:visibility="gone"
                         android:id="@+id/dark_mode_separator"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:background="@color/md_grey_300" />
 
                     <LinearLayout
+                        android:visibility="gone"
                         android:id="@+id/slide_animation_container"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -298,6 +301,7 @@
                     </LinearLayout>
 
                     <View
+                        android:visibility="gone"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:background="@color/md_grey_300" />
@@ -466,6 +470,7 @@
 
 
                         <TextView
+                            android:visibility="gone"
                             android:id="@+id/contact_header"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -480,6 +485,7 @@
                             app:layout_constraintTop_toBottomOf="@id/contact_separator" />
 
                         <TextView
+                            android:visibility="gone"
                             android:id="@+id/contact"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -493,6 +499,7 @@
                             app:layout_constraintTop_toBottomOf="@id/contact_header" />
 
                         <View
+                            android:visibility="gone"
                             android:id="@+id/about_separator"
                             android:layout_width="match_parent"
                             android:layout_height="1dp"

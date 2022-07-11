@@ -147,4 +147,6 @@
     <string name="create_affirmation">Create Affirmation</string>
     <string name="update_affirmation">Update Affirmation</string>
     <string name="update_profile">Update Profile</string>
+    <string name="delete">Delete</string>
+    <string name="update">Update</string>
 </resources>

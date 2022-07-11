@@ -7,33 +7,37 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import com.nextgendevs.hanchor.R
+import com.nextgendevs.hanchor.business.domain.utils.AreYouSureCallback
 import com.nextgendevs.hanchor.business.domain.utils.StateMessageCallback
 import com.nextgendevs.hanchor.databinding.FragmentAffirmationDetailsBinding
 import com.nextgendevs.hanchor.presentation.MainViewModel
 import com.nextgendevs.hanchor.presentation.main.fragments.home.affirmations.AffirmationsFragmentDirections
 import com.nextgendevs.hanchor.presentation.main.fragments.home.affirmations.display_affirmation.DisplayAffirmationFragmentArgs
 import com.nextgendevs.hanchor.presentation.main.fragments.home.affirmations.display_affirmation.DisplayAffirmationFragmentDirections
-import com.nextgendevs.hanchor.presentation.utils.changeStatusBarColor
-import com.nextgendevs.hanchor.presentation.utils.processQueue
-import com.nextgendevs.hanchor.presentation.utils.safeNavigate
-import com.nextgendevs.hanchor.presentation.utils.setStatusBarGradiant
+import com.nextgendevs.hanchor.presentation.main.fragments.home.affirmations.display_affirmation.details.viewmodel.AffirmationViewModel
+import com.nextgendevs.hanchor.presentation.utils.*
+import okhttp3.internal.cache2.Relay.Companion.edit
 
 class AffirmationDetailsFragment : BaseAffirmationDetailsFragment() {
     private var _binding: FragmentAffirmationDetailsBinding? = null
     private val binding: FragmentAffirmationDetailsBinding get() = _binding!!
     private val viewModel: MainViewModel by viewModels()
+    private val affirmationViewModel: AffirmationViewModel by viewModels()
     private var affirmationTitle = ""
-    private var affirmations: List<String> = emptyList()
+    private var affirmations: ArrayList<String> = ArrayList()
     private var ids: List<Long> = emptyList()
 
     private var id = 0L
     private var size = 0
     private var position = 0
     private var affirmationMessage: String? = ""
+
+    private var shouldObserveOnce = true
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -67,9 +71,7 @@ class AffirmationDetailsFragment : BaseAffirmationDetailsFragment() {
         }
 
         binding.close.setOnClickListener {
-            val directions =
-                AffirmationDetailsFragmentDirections.actionAffirmationDetailsFragmentToDisplayAffirmationFragment(affirmationTitle)
-            Navigation.findNavController(binding.root).safeNavigate(directions)
+            navigateToDisplayAffirmation()
         }
 
         binding.right.setOnClickListener {
@@ -83,13 +85,79 @@ class AffirmationDetailsFragment : BaseAffirmationDetailsFragment() {
         }
 
         binding.swinge.setOnClickListener {
-            val directions =
-                AffirmationDetailsFragmentDirections.actionAffirmationDetailsFragmentToCreateAffirmationFragment(
-                    id, affirmationTitle, affirmationMessage, size, position
-                )
-            Navigation.findNavController(binding.root).safeNavigate(directions)
+            val popup = PopupMenu(getContext, binding.swinge)
+            val inflater = popup.menuInflater
+            inflater.inflate(R.menu.options, popup.menu)
+
+            popup.setOnMenuItemClickListener { menuItem ->
+                when (menuItem.itemId) {
+                    R.id.delete -> {
+                        getContext.areYouSureDialog("Delete affirmation", object : AreYouSureCallback {
+                            override fun proceed() {
+                                affirmationViewModel.deleteAffirmation(id)
+                                subscribeAffirmationObservers()
+                            }
+                            override fun cancel() {}
+                        })
+                    }
+                    R.id.update -> {
+                        val directions =
+                            AffirmationDetailsFragmentDirections.actionAffirmationDetailsFragmentToCreateAffirmationFragment(
+                                id, affirmationTitle, affirmationMessage, size, position
+                            )
+                        Navigation.findNavController(binding.root).safeNavigate(directions)
+                    }
+                }
+                true
+            }
+            popup.show()
         }
 
+    }
+
+    private fun navigateToDisplayAffirmation() {
+        val directions =
+            AffirmationDetailsFragmentDirections.actionAffirmationDetailsFragmentToDisplayAffirmationFragment(affirmationTitle)
+        Navigation.findNavController(binding.root).safeNavigate(directions)
+    }
+
+    private fun subscribeAffirmationObservers() {
+        affirmationViewModel.state.observe(viewLifecycleOwner) { affirmationState ->
+            uiCommunicationListener.displayProgressBar(affirmationState.isLoading)
+
+            if (affirmationState.tokenExpired) {
+                activity?.logoutUser(mySharedPreferences)
+            }
+
+            if (affirmationState.deleteResult != 0) {
+                if (shouldObserveOnce) {
+                    if (size > 1) {
+                        size--
+                        if(position == affirmations.size - 1) {
+                            affirmations.remove(affirmations[position])
+                            position--
+                        } else {
+                            affirmations.remove(affirmations[position])
+                        }
+                        updateVariable(position)
+                    } else {
+                        navigateToDisplayAffirmation()
+                    }
+
+                    shouldObserveOnce = false
+                }
+            }
+
+            processQueue(
+                context = context,
+                queue = affirmationState.queue,
+                stateMessageCallback = object : StateMessageCallback {
+                    override fun removeMessageFromStack() {
+                        viewModel.onRemoveHeadFromQuery()
+                    }
+                })
+
+        }
     }
 
     private fun updateVariable(position: Int) {
@@ -163,7 +231,7 @@ class AffirmationDetailsFragment : BaseAffirmationDetailsFragment() {
         viewModel.state.observe(viewLifecycleOwner) { mainState ->
             if (mainState.affirmations.isNotEmpty()) {
                 ids = mainState.affirmations.map { it.id }
-                affirmations = mainState.affirmations.map { it.affirmation }
+                affirmations = mainState.affirmations.map { it.affirmation } as ArrayList<String>
             }
 
             processQueue(

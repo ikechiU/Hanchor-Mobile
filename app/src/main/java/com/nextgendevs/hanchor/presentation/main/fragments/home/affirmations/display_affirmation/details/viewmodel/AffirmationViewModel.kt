@@ -74,6 +74,7 @@ class AffirmationViewModel @Inject constructor(
 
     fun deleteAffirmation(affirmationId: Long) {
         state.value?.let { affirmationState ->
+            state.value = affirmationState.copy(deleteResult = 0)
 
             deleteAffirmation.execute(affirmationId).onEach { dataState ->
                 state.value = affirmationState.copy(isLoading = dataState.isLoading)

@@ -202,6 +202,7 @@
                 app:layout_constraintTop_toBottomOf="@id/btn_signup" />
 
             <LinearLayout
+                android:visibility="gone"
                 android:id="@+id/sign_social_media"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

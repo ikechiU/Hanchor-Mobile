@@ -31,6 +31,7 @@ class AffirmationsFragment : BaseAffirmationsFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        uiCommunicationListener.hideSoftKeyboard()
 
         activity?.changeStatusBarColor(Color.parseColor("#FFFFFF"), true)
 

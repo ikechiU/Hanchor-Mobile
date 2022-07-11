@@ -120,7 +120,7 @@ class GratitudeListAdapter(private val context: Context) :
         fun bind(glideRequestManager: RequestManager, gratitude: Gratitude) {
             binding.gratitudeMessage.text = gratitude.gratitudeMessage
             if (gratitude.gratitudeImageUrl.isEmpty()) {
-                binding.imageContainer.visibility = View.INVISIBLE
+                binding.imageContainer.visibility = View.GONE
             } else {
                 binding.imageContainer.visibility = View.VISIBLE
                 glideRequestManager.load(gratitude.gratitudeImageUrl).into(binding.image)

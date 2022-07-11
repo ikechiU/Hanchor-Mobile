@@ -73,6 +73,7 @@ class CreateAffirmationFragment : BaseCreateAffirmationFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        uiCommunicationListener.hideSoftKeyboard()
         activity?.setStatusBarGradiant(getContext, R.drawable.ic_white_bkgrd)
 
         val bundle = arguments ?: return

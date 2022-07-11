@@ -35,7 +35,7 @@ class DisplayAffirmationFragment : BaseDisplayAffirmationFragment(),
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        uiCommunicationListener.hideSoftKeyboard()
         uiCommunicationListener.displayProgressBar(false)
         activity?.setStatusBarGradiant(getContext, R.drawable.ic_white_bkgrd)
         activity?.changeStatusBarColor(Color.parseColor("#3AB0FF"), true)
