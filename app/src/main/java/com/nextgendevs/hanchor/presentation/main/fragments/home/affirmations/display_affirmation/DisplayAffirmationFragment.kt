@@ -76,11 +76,7 @@ class DisplayAffirmationFragment : BaseDisplayAffirmationFragment(),
 
     private fun subscribeObservers() {
         viewModel.state.observe(viewLifecycleOwner) { mainState ->
-            Log.d(
-                TAG,
-                "subscribeObservers: mainState.affirmationMessages ${mainState.affirmationMessages}"
-            )
-
+            
             if (mainState.affirmations.isNotEmpty()) {
                 binding.emptyAffirmation.visibility = View.GONE
             } else {

@@ -1,8 +1,10 @@
 package com.nextgendevs.hanchor.presentation.utils
 
+import android.app.Activity
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
 import android.net.ConnectivityManager
@@ -25,6 +27,7 @@ import com.afollestad.materialdialogs.callbacks.onDismiss
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.nextgendevs.hanchor.R
 import com.nextgendevs.hanchor.business.domain.utils.*
+import com.nextgendevs.hanchor.presentation.auth.AuthActivity
 
 private val TAG = "AppDebug"
 

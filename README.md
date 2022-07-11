@@ -51,7 +51,7 @@ To build this project, you require:
 <h4 align="center">
 <img src="https://res.cloudinary.com/dpxkejiyy/image/upload/v1656733350/NextGenDevs/2022_07_02_04.41.24_yxf6cn.jpg" width="30%" vspace="10" hspace="10">
 <img src="https://res.cloudinary.com/dpxkejiyy/image/upload/v1656732433/NextGenDevs/2022_07_02_03.45.01_pf4zg5.jpg" width="30%" vspace="10" hspace="10">
-<img src="https://res.cloudinary.com/dpxkejiyy/image/upload/v1657322664/NextGenDevs/2022_07_09_00.19.22_iupinw.jpg" width="30%" vspace="10" hspace="10">
+<img src="https://res.cloudinary.com/dpxkejiyy/image/upload/v1657569290/NextGenDevs/2022_07_11_20.52.53_hjlswe.jpg" width="30%" vspace="10" hspace="10">
 <img src="https://res.cloudinary.com/dpxkejiyy/image/upload/v1656732433/NextGenDevs/2022_07_02_03.42.23_xzwax9.jpg" width="30%" vspace="10" hspace="10">
 <img src="https://res.cloudinary.com/dpxkejiyy/image/upload/v1656732434/NextGenDevs/2022_07_02_03.41.46_eskeke.jpg" width="30%" vspace="10" hspace="10">
 <img src="https://res.cloudinary.com/dpxkejiyy/image/upload/v1657322664/NextGenDevs/2022_07_09_00.18.59_utz0at.jpg" width="30%" vspace="10" hspace="10">

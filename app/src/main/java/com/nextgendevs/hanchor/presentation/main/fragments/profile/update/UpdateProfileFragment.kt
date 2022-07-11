@@ -13,10 +13,7 @@ import com.nextgendevs.hanchor.databinding.FragmentUpdateProfileBinding
 import com.nextgendevs.hanchor.presentation.MainViewModel
 import com.nextgendevs.hanchor.presentation.auth.AuthActivity
 import com.nextgendevs.hanchor.presentation.main.fragments.home.affirmations.AffirmationsFragmentDirections
-import com.nextgendevs.hanchor.presentation.utils.Constants
-import com.nextgendevs.hanchor.presentation.utils.displayToast
-import com.nextgendevs.hanchor.presentation.utils.processQueue
-import com.nextgendevs.hanchor.presentation.utils.safeNavigate
+import com.nextgendevs.hanchor.presentation.utils.*
 
 class UpdateProfileFragment : BaseUpdateProfileFragment() {
     private var _binding: FragmentUpdateProfileBinding? = null
@@ -75,10 +72,7 @@ class UpdateProfileFragment : BaseUpdateProfileFragment() {
             uiCommunicationListener.displayProgressBar(state.isLoading)
 
             if(state.tokenExpired) {
-                mySharedPreferences.storeStringValue(Constants.AUTH_TOKEN, "")
-                val intent = Intent(getContext, AuthActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                activity?.startActivity(intent)
+                activity?.logoutUser(mySharedPreferences)
             }
 
             if (state.userDetails.isNotEmpty()) {

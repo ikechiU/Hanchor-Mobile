@@ -93,6 +93,10 @@ class HomeFragment : BaseHomeFragment() {
             Log.d(TAG, "subscribeObservers: affirmations ${mainState.affirmations}")
             Log.d(TAG, "subscribeObservers: affirmationMessages ${mainState.affirmationMessages}")
 
+            if(mainState.tokenExpired) {
+                activity?.logoutUser(mySharedPreferences)
+            }
+
             processQueue(
                 context = context,
                 queue = mainState.queue,
