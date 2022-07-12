@@ -192,6 +192,7 @@
                 app:layout_constraintTop_toBottomOf="@id/password_container" />
 
             <TextView
+                android:visibility="gone"
                 android:id="@+id/or_sign_with"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
