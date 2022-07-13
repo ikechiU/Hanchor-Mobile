@@ -1,33 +1,17 @@
 package com.nextgendevs.hanchor.presentation.utils
 
-import android.app.Activity
-import android.app.DatePickerDialog
-import android.app.TimePickerDialog
 import android.content.Context
-import android.content.Intent
-import android.graphics.Color
-import android.graphics.Typeface
-import android.net.ConnectivityManager
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import android.widget.TableRow
-import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.IdRes
 import androidx.annotation.StringRes
-import androidx.appcompat.app.AlertDialog
-import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
 import androidx.navigation.NavController
 import androidx.navigation.NavDirections
-import androidx.recyclerview.widget.RecyclerView
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.callbacks.onDismiss
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.nextgendevs.hanchor.R
 import com.nextgendevs.hanchor.business.domain.utils.*
-import com.nextgendevs.hanchor.presentation.auth.AuthActivity
 
 private val TAG = "AppDebug"
 
@@ -248,53 +232,12 @@ fun NavController.safeNavigate(
     }
 }
 
-fun Context.toastMessage(message: String) {
-    Toast.makeText(this, message, Toast.LENGTH_LONG).show()
-}
-
-private fun Context.displayErrorDialog(
-    message: String?
-) {
-    MaterialDialog(this)
-        .show{
-            cornerRadius(10F)
-            title(R.string.text_error)
-            message(text = message)
-            positiveButton(R.string.text_ok){
-                dismiss()
-            }
-            onDismiss {
-            }
-            cancelable(false)
-        }
-}
-
-fun Context.displayInfoDialog(
-    message: String?
-) {
-    MaterialDialog(this)
-        .show{
-            cornerRadius(10F)
-            title(R.string.text_info)
-            message(text = message)
-            positiveButton(R.string.text_ok){
-                dismiss()
-            }
-            onDismiss {
-            }
-            cancelable(false)
-        }
-}
-
 fun Context.areYouSureDialog(
     message: String,
     callback: AreYouSureCallback
 ) {
     MaterialDialog(this)
         .show{
-            //https://stackoverflow.com/questions/55255130/android-afollestad-material-dialog-action-button-text-color
-            val yesText = "<font color='#1B1ED8'>$message</font>"
-            val cancelText = "<font color='#44D81B'>$message</font>"
 
             cornerRadius(10F)
             title(R.string.are_you_sure)
@@ -311,78 +254,4 @@ fun Context.areYouSureDialog(
             }
             cancelable(false)
         }
-}
-
-
-fun isNotEmpty(textView: TextView): Boolean {
-    return textView.text.toString().trim().isNotEmpty()
-}
-
-fun isNotDay(textView: TextView, daysInMonth: Int): Boolean {
-    return (Integer.parseInt(textView.text.toString().trim()) > daysInMonth)
-}
-
-fun isDayToHighlight(textView: TextView, currentDay: Int) : Boolean {
-    return (Integer.parseInt(textView.text.toString()) == currentDay)
-}
-
-fun highlightDay(textView: TextView, dayOfMonthColor: String) {
-    textView.setTextColor(Color.parseColor(dayOfMonthColor))
-    textView.setTypeface(textView.typeface, Typeface.BOLD)
-}
-
-fun setEmptyText(textView: TextView) {
-    textView.text = ""
-}
-
-fun hideTableRow(tableRow: TableRow) {
-    tableRow.visibility = View.GONE
-}
-
-fun showTableRow(tableRow: TableRow) {
-    tableRow.visibility = View.VISIBLE
-}
-
-fun Context.isInternetAvailable(): Boolean {
-    val mConMgr = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-
-    return (mConMgr.activeNetworkInfo != null && mConMgr.activeNetworkInfo!!.isAvailable
-            && mConMgr.activeNetworkInfo!!.isConnected)
-}
-
-fun DatePickerDialog.makeButtonTextPurple() {
-    this.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(ContextCompat.getColor(context, R.color.primary_color_light))
-    this.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(ContextCompat.getColor(context, R.color.primary_color_light))
-}
-
-fun TimePickerDialog.makeButtonTextPurple() {
-    this.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(ContextCompat.getColor(context, R.color.primary_color_light))
-    this.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(ContextCompat.getColor(context, R.color.primary_color_light))
-}
-
-fun AlertDialog.makeButtonTextPurple() {
-    this.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(ContextCompat.getColor(context, R.color.primary_color_light))
-    this.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(ContextCompat.getColor(context, R.color.primary_color_light))
-    this.getButton(AlertDialog.BUTTON_NEUTRAL).setTextColor(ContextCompat.getColor(context, R.color.primary_color_light))
-}
-
-fun RecyclerView.hideFabOnScroll(fab: FloatingActionButton) {
-    var scrollingPosition = 0
-
-    this.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-        override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-            super.onScrollStateChanged(recyclerView, newState)
-
-            if(scrollingPosition > 0 && fab.isVisible) { //scrolling up
-                fab.visibility = View.INVISIBLE
-            } else  {
-                fab.visibility = View.VISIBLE
-            }
-        }
-
-        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-            super.onScrolled(recyclerView, dx, dy)
-            scrollingPosition = dy
-        }
-    })
 }

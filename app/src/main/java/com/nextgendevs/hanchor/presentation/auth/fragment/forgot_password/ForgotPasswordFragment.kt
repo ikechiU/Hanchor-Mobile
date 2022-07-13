@@ -35,6 +35,7 @@ class ForgotPasswordFragment : BaseForgotPasswordFragment() {
 
         binding.btnResetPassword.setOnClickListener{
             viewModel.forgotPassword(binding.email.text.toString())
+            shouldObserveOnce =  true
             subscribeObservers()
             uiCommunicationListener.hideSoftKeyboard()
         }

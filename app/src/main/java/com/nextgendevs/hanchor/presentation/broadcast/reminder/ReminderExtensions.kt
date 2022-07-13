@@ -7,7 +7,6 @@ import android.content.Intent
 import android.util.Log
 import com.nextgendevs.hanchor.presentation.utils.Constants
 import com.nextgendevs.hanchor.presentation.utils.getBroadcastPendingIntent
-import com.nextgendevs.hanchor.presentation.utils.setAlarm
 
 
 private const val TAG = "ScheduleReminder"
@@ -67,4 +66,8 @@ fun Context.scheduleSnoozeReminder(nextReminderTime: Long, task: String, id: Lon
     val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
     setAlarm(alarmManager, nextReminderTime, pendingIntent)
     Log.d(TAG, "createPendingIntent: $alarmManager")
+}
+
+private fun setAlarm(alarmManager: AlarmManager, alarmTime: Long, alarmPendingIntent: PendingIntent?) {
+    alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, alarmTime, alarmPendingIntent)
 }

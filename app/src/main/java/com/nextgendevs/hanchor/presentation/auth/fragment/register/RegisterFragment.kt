@@ -39,6 +39,7 @@ class RegisterFragment : BaseRegisterFragment() {
         uiCommunicationListener.hideSoftKeyboard()
 
         binding.btnSignup.setOnClickListener {
+            shouldObserveOnce =  true
             viewModel.register(
                 binding.fullname.text.toString(),
                 binding.email.text.toString(),

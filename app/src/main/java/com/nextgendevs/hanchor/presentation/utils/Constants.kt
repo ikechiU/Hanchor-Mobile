@@ -45,15 +45,8 @@ class Constants {
         const val FIFTEEN_MINUTES = 900000L
         const val THIRTY_MINUTES = 1800000L
         const val FIVE_SECONDS = 5000L
-        const val ONE_MINUTE = 60000L
-        const val TWO_MINUTES = 120000L
-
 
         const val LIST_OF_TODOS = "com.nextgendevs.constants_LIST_OF_TODOS"
-
-
-
-        const val STOP_SELF_SERVICE_KEY = "com.nextgendevs.constants_STOP_SELF_SERVICE_KEY"
 
         const val FCM_NOTIFICATION = 300557
 

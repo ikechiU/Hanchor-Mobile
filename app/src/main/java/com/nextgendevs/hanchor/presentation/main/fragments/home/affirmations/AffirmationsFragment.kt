@@ -19,7 +19,6 @@ import com.nextgendevs.hanchor.presentation.utils.safeNavigate
 class AffirmationsFragment : BaseAffirmationsFragment() {
     private var _binding: FragmentAffirmationsBinding? = null
     private val binding: FragmentAffirmationsBinding get() = _binding!!
-    private val viewModel: MainViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

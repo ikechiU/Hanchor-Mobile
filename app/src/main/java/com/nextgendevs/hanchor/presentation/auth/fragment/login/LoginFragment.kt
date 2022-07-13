@@ -50,6 +50,7 @@ class LoginFragment : BaseLoginFragment() {
         binding.password.setText(password)
 
         if (email.isNotEmpty() && password.isNotEmpty()) {
+            shouldObserveOnce =  true
             Log.d(TAG, "onViewCreated: email is $email")
             Log.d(TAG, "onViewCreated: password is $password")
             viewModel.login(email, password)
@@ -58,6 +59,7 @@ class LoginFragment : BaseLoginFragment() {
         }
 
         binding.btnLogin.setOnClickListener {
+            shouldObserveOnce =  true
             lifecycleScope.launch {
                 viewModel.login(binding.email.text.toString(), binding.password.text.toString())
                 subscribeObservers(2)

@@ -60,6 +60,7 @@ class UpdateProfileFragment : BaseUpdateProfileFragment() {
         val username = binding.username.text.toString()
 
         if (fullname.isNotEmpty() && username.isNotEmpty()) {
+            shouldObserveOnce =  true
             viewModel.updateUser(fullname, username)
             subscribeObservers(fullname, username)
         } else {

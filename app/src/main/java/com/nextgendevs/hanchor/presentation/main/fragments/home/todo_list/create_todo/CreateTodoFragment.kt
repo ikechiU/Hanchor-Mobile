@@ -176,7 +176,7 @@ class CreateTodoFragment : BaseCreateTodoFragment() {
                 }
             }
         } else {
-            getContext.toastMessage("All fields required")
+            getContext.displayToast("All fields required")
         }
     }
 

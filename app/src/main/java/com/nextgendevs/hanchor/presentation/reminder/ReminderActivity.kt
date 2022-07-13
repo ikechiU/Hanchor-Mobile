@@ -84,6 +84,7 @@ class ReminderActivity : BaseActivity() {
     private fun markTodoAsDone() {
         val todoRequest = TodoRequest("TODO", task, time, true)
         viewModel.updateTodo(id, todoRequest)
+        shouldObserveOnce =  true
         subscribeObservers()
     }
 

@@ -198,7 +198,7 @@ class CreateGratitudeFragment : BaseCreateGratitudeFragment() {
             }
 
         } else {
-            getContext.toastMessage("Graditude message and image required.")
+            getContext.displayToast("Graditude message and image required.")
         }
 
     }
