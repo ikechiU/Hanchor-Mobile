@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import com.google.gson.Gson
@@ -95,7 +96,7 @@ class ReminderActivity : BaseActivity() {
                 if (shouldObserveOnce) {
                     shouldObserveOnce = false
 
-                    mySharedPreferences.storeStringValue(Constants.LIST_OF_TODOS, Gson().toJson(todoState.todoList))
+                    Log.d(TAG, "subscribeObservers: Updated")
                 }
             }
 

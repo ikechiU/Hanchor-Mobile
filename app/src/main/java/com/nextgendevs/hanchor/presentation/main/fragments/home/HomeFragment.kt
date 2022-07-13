@@ -41,8 +41,6 @@ class HomeFragment : BaseHomeFragment() {
             mySharedPreferences.storeStringValue(Constants.FCM_LIFE_HACK, getString(R.string.default_life_hack))
         }
 
-        Log.d(TAG, "onViewCreated: stored list is ${mySharedPreferences.getStoredString(Constants.LIST_OF_TODOS)}")
-
         val quote = (requireActivity() as MainActivity).getQuote()
         val lifeHack = (requireActivity() as MainActivity).getLifeHack()
 

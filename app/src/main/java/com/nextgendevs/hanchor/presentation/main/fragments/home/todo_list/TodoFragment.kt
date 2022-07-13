@@ -81,9 +81,6 @@ class TodoFragment : BaseTodoFragment(), SwipeRefreshLayout.OnRefreshListener {
                     }
                 })
 
-            if (todoState.todoList.isNotEmpty()) {
-                mySharedPreferences.storeStringValue(Constants.LIST_OF_TODOS, Gson().toJson(todoState.todoList))
-            }
             todoListAdapter.apply {
                 submitList(list  = todoState.todoList)
             }

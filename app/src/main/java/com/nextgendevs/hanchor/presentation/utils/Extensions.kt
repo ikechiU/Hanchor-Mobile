@@ -4,9 +4,9 @@ import android.app.*
 import android.content.Context
 import android.content.Intent
 import android.media.RingtoneManager
+import android.net.Uri
 import android.os.Build
 import android.provider.Settings
-import android.util.Log
 import android.view.Window
 import android.view.WindowManager
 import androidx.annotation.RequiresApi
@@ -17,11 +17,6 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.callbacks.onDismiss
 import com.nextgendevs.hanchor.R
 import com.nextgendevs.hanchor.presentation.auth.AuthActivity
-import com.nextgendevs.hanchor.presentation.main.MainActivity
-import java.text.ParseException
-import java.text.SimpleDateFormat
-import java.util.*
-import java.util.concurrent.TimeUnit
 
 
 private const val TAG = "MyExtensionFunctions"
@@ -43,8 +38,9 @@ fun Context.setNotification(
         notificationManager.createNotificationChannel(notificationChannel)
     }
 
-//    val ringtoneSound =
-//        Uri.parse("android.resource://com.nextgendevs.hanchor/raw/R.raw.aviscovery")
+//    val notificationSound  = R.raw.aviscovery
+//    val sound =
+//        Uri.parse("android.resource://com.nextgendevs.hanchor/raw/$notificationSound")
     val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
 
     val notificationBuilder: NotificationCompat.Builder =
@@ -58,6 +54,35 @@ fun Context.setNotification(
             .setContentIntent(pendingIntent)
     notificationManager.notify(System.currentTimeMillis().toInt(), notificationBuilder.build())
 }
+
+fun Context.setNotification(
+    title: String,
+    body: String
+): Notification {
+    val notificationManager =
+        applicationContext.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        val notificationChannel = NotificationChannel(
+            Constants.NOTIFICATION_CHANNEL_ID,
+            Constants.NOTIFICATION_NAME,
+            NotificationManager.IMPORTANCE_HIGH
+        )
+        notificationManager.createNotificationChannel(notificationChannel)
+    }
+
+    val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+
+    return NotificationCompat.Builder(applicationContext, Constants.NOTIFICATION_CHANNEL_ID)
+        .setContentTitle(title)
+        .setContentText(body)
+        .setSound(defaultSoundUri)
+        .setSmallIcon(android.R.drawable.star_on)
+        .setColor(applicationContext.resources.getColor(R.color.primary_color_light))
+        .setAutoCancel(true)
+        .build()
+}
+
 
 @RequiresApi(Build.VERSION_CODES.S)
 fun Context.confirmSchedulePermission() {

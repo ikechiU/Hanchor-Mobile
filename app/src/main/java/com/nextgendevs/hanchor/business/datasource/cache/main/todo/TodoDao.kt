@@ -30,4 +30,7 @@ interface TodoDao {
         page: Int,
         limit: Int = 10
     ): List<TodoEntity>
+
+    @Query("SELECT * FROM todo_table ORDER BY todo_date DESC")
+    suspend fun fetchTodos(): List<TodoEntity>
 }

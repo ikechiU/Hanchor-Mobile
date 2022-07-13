@@ -73,6 +73,8 @@
             </intent-filter>
         </service>
 
+        <service android:name=".presentation.service.RescheduleReminderService" />
+
         <receiver
             android:name=".presentation.broadcast.reminder.ReminderReceiver"
             android:exported="false">

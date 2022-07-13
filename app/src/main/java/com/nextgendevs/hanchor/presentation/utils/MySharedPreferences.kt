@@ -74,12 +74,3 @@ fun MySharedPreferences.setDefaultTodoId() : Long {
 }
 
 
-fun MySharedPreferences.getTodoList() : List<Todo>? {
-    val json: String = this.getStoredString(Constants.LIST_OF_TODOS)
-    val type = object : TypeToken<List<Todo?>?>() {}.type
-    return if (Gson().fromJson<List<Todo>>(json, type) == null)
-        null
-    else
-        Gson().fromJson<List<Todo>>(json, type)
-}
-

@@ -46,8 +46,6 @@ class Constants {
         const val THIRTY_MINUTES = 1800000L
         const val FIVE_SECONDS = 5000L
 
-        const val LIST_OF_TODOS = "com.nextgendevs.constants_LIST_OF_TODOS"
-
         const val FCM_NOTIFICATION = 300557
 
         const val PI_TODO_REMINDER = 304400
